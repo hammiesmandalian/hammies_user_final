@@ -385,21 +385,7 @@ class _FormWidgetState extends State<FormWidget> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
-              child: TextFormField(
-                controller: emailController,
-                validator: (e) => e?.isEmpty == true
-                    ? "Email is required"
-                    : e?.isEmail == true
-                        ? null
-                        : "Invalid email",
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Email',
-                ),
-              ),
-            ),
+
             Padding(
               padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
               child: TextFormField(
@@ -425,6 +411,21 @@ class _FormWidgetState extends State<FormWidget> {
                 ),
               ),
             ),
+
+            Padding(
+              padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
+              child: TextFormField(
+                controller: emailController,
+                validator: (e) => e?.isEmpty == true
+                    ? "Remark is required"
+                    : null,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'မှတ်ချက်',
+                ),
+              ),
+            ),
+
             Container(
               width: double.infinity,
               height: 50,
