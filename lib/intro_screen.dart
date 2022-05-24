@@ -5,75 +5,64 @@ import 'screen/home_screen.dart';
 
 class OnBoardingPage extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => SafeArea(
-        child: IntroductionScreen(
+  Widget build(BuildContext context) => IntroductionScreen(
           pages: [
             PageViewModel(
-              title: "CINDY BRANDED FASHION SHOP",
-              body: ''' EXPORT QUALITY
-          
-MADE IN MYANMAR
+              title: "",
+              body: ''' 🐹 Hammies Mandalian 🐹 မှ
 
-FAIR PRICE
-
-EXPORT CLOTHING
-
-EXPORT FASHION
-
-CINDY EXPORT FASHION
-
-CINDY BRANDED EXPORT FASHION''',
-              image: buildImage('assets/hammies.jpg'),
-              decoration: getPageDecoration(),
-            ),
-            PageViewModel(
-              title: "CINDY BRANDED FASHION SHOP",
-              body: ''' 
-          𝐂𝐢𝐧𝐝𝐲 ဆိုတာ 
-          🌿 ️တစ်နေကုန် အေးမြမယ်...
-          🌿 ️ပေါ့ပါးမယ်..
-          🌿 ️သက်သောင့်သက်သာရှိမယ်...
-          🌿 ️ရိုးရှင်းစွာလှပမယ်...
-          🌿 ️ဘောင်းဘီနဲ့ဝတ်ဝတ် 
-          🌿 စကပ်နဲ့ဝတ်ဝတ်လှနေမယ်..
-          🌿 ️ဘယ်နေရာသွားသွား 
-          🌿 ဝတ်လို့ရစေရမယ်...
-          🌿 ️ဈေးနှုန်းသက်သာမယ်...''',
+နွေးထွေးစွာ ကြိုဆိုလိုက်ပါတယ် 🇲🇲 ''',
               image: buildImage('assets/1.png'),
               decoration: getPageDecoration(),
             ),
+//             PageViewModel(
+//               title: "Hammies Mandalian Accessories & Food",
+//               body: '''
+//           🐹Hammies Mandalian 🐹
+//
+// “ Hamster Food and Accessories “မျိုးစုံကို
+//
+// တစ်နေရာတည်းမှာ မိမိစိတ်ကြိုက်
+//
+// ဝယ်ယူနိုင်ပါပြီ ”''',
+//               image: buildImage('assets/2.jpeg'),
+//               decoration: getPageDecoration(),
+//             ),
+          //   PageViewModel(
+          //     title: 'EVERYTIME YOU WILL NEED MY CINDY',
+          //     body: '''
+          // 🌿  ခရီးထွက်ကြတဲ့အခါ...
+          // 🌿  Shopping ထွကိကြတဲ့အခါ...
+          // 🌿  မုန့်ထွက်စားကြတဲ့အခါ...
+          // 🌿 လျှောက်လည်တဲ့အခါတိုင်း
+          // ❝   𝐂𝐢𝐧𝐝𝐲 ကို သတိရလိုက်ပါနော်  ❞ ''',
+          //     image: buildImage('assets/2.png'),
+          //     decoration: getPageDecoration(),
+          //   ),
+          //   PageViewModel(
+          //     title: "EVERYTIME YOU WILL NEED MY CINDY",
+          //     body: '''
+          // 🌧  မိုးလေးကလဲရွာ....
+          // 💨  လေလေးကလဲတိုက်....
+          // 🤔  ဘာဝတ်ပြီး အပြင်ထွက်ရမလဲနော် ❓''',
+          //     image: buildImage('assets/4.png'),
+          //     decoration: getPageDecoration(),
+          //   ),
             PageViewModel(
-              title: 'EVERYTIME YOU WILL NEED MY CINDY',
-              body: '''
-          🌿  ခရီးထွက်ကြတဲ့အခါ...
-          🌿  Shopping ထွကိကြတဲ့အခါ...
-          🌿  မုန့်ထွက်စားကြတဲ့အခါ...
-          🌿 လျှောက်လည်တဲ့အခါတိုင်း 
-          ❝   𝐂𝐢𝐧𝐝𝐲 ကို သတိရလိုက်ပါနော်  ❞ ''',
-              image: buildImage('assets/2.png'),
-              decoration: getPageDecoration(),
-            ),
-            PageViewModel(
-              title: "EVERYTIME YOU WILL NEED MY CINDY",
-              body: '''
-          🌧  မိုးလေးကလဲရွာ....
-          💨  လေလေးကလဲတိုက်....
-          🤔  ဘာဝတ်ပြီး အပြင်ထွက်ရမလဲနော် ❓''',
-              image: buildImage('assets/4.png'),
-              decoration: getPageDecoration(),
-            ),
-            PageViewModel(
-              title: 'HAPPY AND ONLY MY CINDY',
-              body: ''' ❝  အမြဲတမ်း လွတ်လပ်ပေါ့ပါးနေစေဖို့
-              𝐂𝐢𝐧𝐝𝐲 ဝတ်ကြစို့  ❞ ''',
-              footer: Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: ButtonWidget(
+              title: '',
+              body: '''  🐹Hammies Mandalian 🐹
+
+❝  Hamster Food and Accessories “မျိုးစုံကို
+
+တစ်နေရာတည်းမှာ မိမိစိတ်ကြိုက်
+
+ဝယ်ယူနိုင်ပါပြီ  ❞ ''',
+              footer: ButtonWidget(
                   text: "LET'S GET STARTED",
                   onClicked: () => goToHome(context),
                 ),
-              ),
-              image: buildImage('assets/3.png'),
+
+              image: buildImage('assets/2.jpeg'),
               decoration: getPageDecoration(),
             ),
           ],
@@ -96,15 +85,14 @@ CINDY BRANDED EXPORT FASHION''',
           // showNextButton: true,
           // freeze: true,
           // animationDuration: 1000,
-        ),
-      );
+        );
 
   void goToHome(context) => Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) => HomeScreen()),
       );
 
   Widget buildImage(String path) =>
-      Center(child: Image.asset(path, width: 350));
+      Center(child: Image.asset(path, width: 300));
 
   DotsDecorator getDotDecoration() => DotsDecorator(
         color: Colors.indigo,
@@ -112,15 +100,15 @@ CINDY BRANDED EXPORT FASHION''',
         size: Size(10, 10),
         activeSize: Size(22, 10),
         activeShape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(10),
         ),
       );
 
   PageDecoration getPageDecoration() => PageDecoration(
         titleTextStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
         titlePadding: EdgeInsets.only(top: 20),
-        descriptionPadding: EdgeInsets.only(top: 30).copyWith(bottom: 0),
-        imagePadding: EdgeInsets.only(top: 30),
+        // descriptionPadding: EdgeInsets.only(top: 30).copyWith(bottom: 0),
+        imagePadding: EdgeInsets.only(top: 100),
         pageColor: Colors.white,
       );
 }

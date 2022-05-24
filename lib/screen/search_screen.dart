@@ -20,16 +20,13 @@ class SearchScreen extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: appBarColor,
+
         elevation: 0,
-        title: Text(
-          "𝐂𝐢𝐧𝐝𝐲 Export & Clothing Brand Fashion",
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-        ),
         // centerTitle: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         actions: [
           // InkWell(
           //   onTap: () {
@@ -56,7 +53,7 @@ class SearchScreen extends StatelessWidget {
           //   ),
           // )
           Container(
-            width: MediaQuery.of(context).size.width * 0.6,
+            width: MediaQuery.of(context).size.width * 0.67,
             height: 50,
             child: TextField(
               autofocus: true,

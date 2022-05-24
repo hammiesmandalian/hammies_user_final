@@ -127,6 +127,6 @@ Widget circularNetworkImage(String url, double radius) {
       return const Text("Image not available");
     },
     imageUrl: url,
-    //fit: BoxFit.fill,
+    fit: BoxFit.fitHeight,
   );
 }

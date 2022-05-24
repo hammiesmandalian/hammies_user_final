@@ -22,163 +22,164 @@ class CartView extends StatelessWidget {
 
     return Column(
       children: [
-        Expanded(
-          child: Obx(
-            () => ListView.builder(
-              itemCount: controller.myCart.length,
-              itemBuilder: (_, i) {
-                String photo =
-                    controller.getItem(controller.myCart[i].id).photo;
+        Obx(
+            () =>controller.myCart.length > 0  ? Expanded(
+              child: ListView.builder(
+                itemCount: controller.myCart.length,
+                itemBuilder: (_, i) {
+                  String photo =
+                      controller.getItem(controller.myCart[i].id).photo;
 
-                return Card(
-                  margin: EdgeInsets.only(top: 10, left: 10, right: 10),
-                  child: Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomLeft: Radius.circular(10),
+                  return Card(
+                    margin: EdgeInsets.only(top: 10, left: 10, right: 10),
+                    child: Row(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            bottomLeft: Radius.circular(10),
+                          ),
+                          child: CachedNetworkImage(
+                            imageUrl: photo,
+                            // "$baseUrl$itemUrl${controller.getItem(controller.myCart[i].id).photo}/get",
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                        child: CachedNetworkImage(
-                          imageUrl: photo,
-                          // "$baseUrl$itemUrl${controller.getItem(controller.myCart[i].id).photo}/get",
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.cover,
+                        SizedBox(
+                          width: 10,
                         ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                                controller
-                                    .getItem(controller.myCart[i].id)
-                                    .name,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                )),
-                            SizedBox(height: 5),
-                            Text(
-                              "${controller.myCart[i].color}",
-                              style: TextStyle(fontSize: 12),
-                            ),
-                            SizedBox(height: 5),
-                            Text(
-                              "${controller.myCart[i].size}",
-                              style: TextStyle(fontSize: 12),
-                            ),
-                            SizedBox(height: 5),
-                            Text(
-                              "${controller.myCart[i].priceType.split('.').last} \n ${controller.myCart[i].price} ကျပ်",
-                              style: TextStyle(fontSize: 12),
-                            ),
-                          ],
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                  controller
+                                      .getItem(controller.myCart[i].id)
+                                      .name,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  )),
+                              SizedBox(height: 5),
+                              Text(
+                                "${controller.myCart[i].color}",
+                                style: TextStyle(fontSize: 12),
+                              ),
+                              SizedBox(height: 5),
+                              Text(
+                                "${controller.myCart[i].size}",
+                                style: TextStyle(fontSize: 12),
+                              ),
+                              SizedBox(height: 5),
+                              Text(
+                                "${controller.myCart[i].priceType.split('.').last} \n ${controller.myCart[i].price} ကျပ်",
+                                style: TextStyle(fontSize: 12),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                controller.remove(controller.myCart[i]);
-                              },
-                              icon: Icon(Icons.remove),
-                            ),
-                            Text(controller.myCart[i].count.toString()),
-                            IconButton(
-                              onPressed: () {
-                                controller.addCount(controller.myCart[i]);
-                              },
-                              icon: Icon(Icons.add),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                );
-              },
-            ),
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  controller.remove(controller.myCart[i]);
+                                },
+                                icon: Icon(Icons.remove),
+                              ),
+                              Text(controller.myCart[i].count.toString()),
+                              IconButton(
+                                onPressed: () {
+                                  controller.addCount(controller.myCart[i]);
+                                },
+                                icon: Icon(Icons.add),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ) : const SizedBox(),
           ),
-        ),
+
         //Reward Cart
-        Expanded(
-          child: Obx(
-            () => ListView(
-              shrinkWrap: true,
-              children: controller.myRewardCart.values.map((rewardProduct) {
-                return Card(
-                  margin: EdgeInsets.only(top: 10, left: 10, right: 10),
-                  child: Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomLeft: Radius.circular(10),
+         Obx(
+            () =>controller.myRewardCart.length > 0 ? Expanded(
+              child: ListView(
+                shrinkWrap: true,
+                children: controller.myRewardCart.values.map((rewardProduct) {
+                  return Card(
+                    margin: EdgeInsets.only(top: 10, left: 10, right: 10),
+                    child: Row(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            bottomLeft: Radius.circular(10),
+                          ),
+                          child: CachedNetworkImage(
+                            imageUrl: rewardProduct.image,
+                            // "$baseUrl$itemUrl${controller.getItem(controller.myCart[i].id).photo}/get",
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                        child: CachedNetworkImage(
-                          imageUrl: rewardProduct.image,
-                          // "$baseUrl$itemUrl${controller.getItem(controller.myCart[i].id).photo}/get",
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.cover,
+                        SizedBox(
+                          width: 10,
                         ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(rewardProduct.name,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                )),
-                            SizedBox(height: 5),
-                            Text(
-                              "${rewardProduct.requirePoint}",
-                              style: TextStyle(fontSize: 12),
-                            ),
-                          ],
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(rewardProduct.name,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  )),
+                              SizedBox(height: 5),
+                              Text(
+                                "${rewardProduct.requirePoint}",
+                                style: TextStyle(fontSize: 12),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                controller.reduceRewardCount(rewardProduct);
-                              },
-                              icon: Icon(Icons.remove),
-                            ),
-                            Text(rewardProduct.count.toString()),
-                            IconButton(
-                              onPressed: () {
-                                controller.addRewardCount(rewardProduct);
-                              },
-                              icon: Icon(Icons.add),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
-        ),
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  controller.reduceRewardCount(rewardProduct);
+                                },
+                                icon: Icon(Icons.remove),
+                              ),
+                              Text(rewardProduct.count.toString()),
+                              IconButton(
+                                onPressed: () {
+                                  controller.addRewardCount(rewardProduct);
+                                },
+                                icon: Icon(Icons.add),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                }).toList(),
+              ),
+            ) : const SizedBox()),
+
         GetBuilder<HomeController>(builder: (controller) {
           return Container(
             width: double.infinity,
-            height: 200,
+            height: 170,
             child: Card(
               margin: EdgeInsets.only(
                 top: 10,
@@ -223,16 +224,10 @@ class CartView extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          "ပို့ဆောင်စရိတ်",
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
+
                         //DropDown TownShip List
                         Container(
-                          width: 100,
+                          width: 200,
                           height: 50,
                           child:
                               GetBuilder<HomeController>(builder: (controller) {
@@ -252,26 +247,44 @@ class CartView extends StatelessWidget {
                                   child: Text(
                                     controller.townShipNameAndFee["townName"] ??
                                         "မြို့နယ်",
-                                    overflow: TextOverflow.ellipsis,
                                     maxLines: 1,
+                                    style: TextStyle(
+                                      fontSize: 12
+                                    ),
                                   ),
                                 ),
                                 //DropDown Icon
                                 Expanded(
-                                    child: Icon(FontAwesomeIcons.angleDown)),
+                                    child: Icon(FontAwesomeIcons.angleRight)),
+
+
                               ]),
                             );
                           }),
                         ),
                         GetBuilder<HomeController>(builder: (controller) {
-                          return Text(
-                            controller.townShipNameAndFee.isEmpty
-                                ? "0ကျပ်"
-                                : " ${controller.townShipNameAndFee["fee"]} ကျပ်",
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                            ),
+                          return Row(
+                            children: [
+                              Text(
+                                "ပို့ဆောင်စရိတ်",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                controller.townShipNameAndFee.isEmpty
+                                    ? "0 ကျပ်"
+                                    : " ${controller.townShipNameAndFee["fee"]} ကျပ်",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
                           );
                         }),
                       ],
@@ -351,7 +364,11 @@ class CartView extends StatelessWidget {
                 Get.snackbar('Error', "Cart is empty");
               }
             },
-            child: Text("Order တင်ရန် နှိပ်ပါ"),
+            child: Text("Order တင်ရန် နှိပ်ပါ",
+            style: TextStyle(
+              wordSpacing: 1,
+              letterSpacing: 1,
+            ),),
           ),
         )
       ],
@@ -371,7 +388,7 @@ class CartView extends StatelessWidget {
               right: BorderSide(),
             ),
           ),
-          width: 150,
+          width: 200,
           child: ListView.builder(
             shrinkWrap: true,
             itemCount: divisionList.length,
@@ -399,7 +416,9 @@ class CartView extends StatelessWidget {
                       : Colors.white,
                   duration: const Duration(milliseconds: 200),
                   child:
-                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
                     //Text
                     Text(divisionList[divisionIndex].name),
                     SizedBox(width: 10),
@@ -419,8 +438,8 @@ class CartView extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
-        width: 200,
-        height: MediaQuery.of(Get.context!).size.height * 0.4,
+        width: 300,
+        height: MediaQuery.of(Get.context!).size.height * 0.5,
         decoration: BoxDecoration(
           border: Border(
             top: BorderSide(),
@@ -449,9 +468,11 @@ class CartView extends StatelessWidget {
                         Get.back();
                       },
                       child: Text(map.value[index],
+                          textAlign: TextAlign.left,
                           style: TextStyle(
                             color: Colors.black,
-                          )),
+                          ),
+                      ),
                     );
                   }),
             );
@@ -475,7 +496,7 @@ class PaymentOptionContent extends StatelessWidget {
           options: PaymentOptions.CashOnDelivery,
           icon: FontAwesomeIcons.truck,
           iconColor: Colors.amber,
-          text: "Cash On Delivery",
+          text: "ပစ္စည်း ရောက်မှ ငွေချေမယ်",
         ),
         SizedBox(height: 5),
         CustomCheckBox(
@@ -483,7 +504,7 @@ class PaymentOptionContent extends StatelessWidget {
           options: PaymentOptions.PrePay,
           icon: FontAwesomeIcons.moneyBill,
           iconColor: Colors.blue,
-          text: "Pre-Pay",
+          text: "ငွေကြိုလွှဲမယ်",
         ),
       ]),
     );

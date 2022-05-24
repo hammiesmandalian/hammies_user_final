@@ -785,7 +785,7 @@ class HomeController extends GetxController {
 
   void onSearch(String name) {
     isSearch.value = true;
-    searchitems.value = exportAndBrandItems
+    searchitems.value = items
         .where((p0) => p0.name.toLowerCase().contains(name.toLowerCase()))
         .toList();
   }

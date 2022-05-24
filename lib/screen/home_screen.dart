@@ -1,11 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hammies_user/utils/widget/widget.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../controller/home_controller.dart';
@@ -16,12 +14,13 @@ import 'view/brand.dart';
 import 'view/cart.dart';
 import 'view/favourite.dart';
 import 'view/home.dart';
+import 'view/hot.dart';
 import 'view/order_history.dart';
 
 List<Widget> _template = [
   HomeView(),
-  BrandView(),
-  //HotView(),
+  // BrandView(),
+  HotView(),
   CartView(),
   FavouriteView(),
   OrderHistory(),
@@ -108,11 +107,13 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: appBarColor,
         elevation: 0,
         title: Text(
-          "Hammies Mandalian",
+          "Hammies  Mandalian",
           style: TextStyle(
-            fontSize: 14,
+            fontSize: 16,
             fontWeight: FontWeight.bold,
             color: appBarTitleColor,
+            letterSpacing: 1,
+            wordSpacing: 1,
           ),
         ),
         // centerTitle: true,
@@ -141,25 +142,28 @@ class _HomeScreenState extends State<HomeScreen> {
           //     ),
           //   ),
           // )
-          ElevatedButton(
-            style: ButtonStyle(
-              alignment: Alignment.center,
-              backgroundColor: MaterialStateProperty.all(Colors.white),
-              elevation: MaterialStateProperty.resolveWith<double>(
-                // As you said you dont need elevation. I'm returning 0 in both case
-                (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.disabled)) {
-                    return 0;
-                  }
-                  return 0; // Defer to the widget's default.
-                },
+          SizedBox(
+            width: 40,
+            child: ElevatedButton(
+              style: ButtonStyle(
+                alignment: Alignment.center,
+                backgroundColor: MaterialStateProperty.all(Colors.white),
+                elevation: MaterialStateProperty.resolveWith<double>(
+                  // As you said you dont need elevation. I'm returning 0 in both case
+                  (Set<MaterialState> states) {
+                    if (states.contains(MaterialState.disabled)) {
+                      return 0;
+                    }
+                    return 0; // Defer to the widget's default.
+                  },
+                ),
               ),
-            ),
-            onPressed: () => Get.toNamed(searchScreen),
-            child: FaIcon(
-              FontAwesomeIcons.search,
-              color: Colors.black,
-              size: 20,
+              onPressed: () => Get.toNamed(searchScreen),
+              child: FaIcon(
+                FontAwesomeIcons.search,
+                color: Colors.black,
+                size: 20,
+              ),
             ),
           ),
 
@@ -179,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             onPressed: () async {
               try {
-                await launch('https://m.me/Cindy.Branded.Export.Fashion');
+                await launch('https://m.me/HammiesMandalian25');
               } catch (e) {
                 print(e);
               }
@@ -202,7 +206,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Obx(() {
               return circularNetworkImage(
                 controller.currentUser.value?.image ?? userImage,
-                30,
+                12,
               );
             }),
           ),

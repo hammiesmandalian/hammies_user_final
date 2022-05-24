@@ -44,24 +44,21 @@ class DetailScreen extends StatelessWidget {
                     CachedNetworkImage(
                       imageUrl: controller.selectedItem.value.photo,
                       // "$baseUrl$itemUrl${controller.selectedItem.value.photo}/get",
-                      height: double.infinity,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fitWidth,
                     ),
                     CachedNetworkImage(
                       imageUrl: controller.selectedItem.value.photo2,
                       // "$baseUrl$itemUrl${controller.selectedItem.value.photo}/get",
-                      height: double.infinity,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fitWidth,
                     ),
                     CachedNetworkImage(
                       imageUrl: controller.selectedItem.value.photo3,
                       // "$baseUrl$itemUrl${controller.selectedItem.value.photo}/get",
-                      height: double.infinity,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fitWidth,
                     ),
                   ],
                   options: CarouselOptions(
-                    height: 400,
+                    height: 300,
                     viewportFraction: 0.8,
                     initialPage: 0,
                     enableInfiniteScroll: true,
@@ -155,7 +152,7 @@ class DetailScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "တစ်ထည်ဈေး (Retail) :",
+                      "စျေးနှုန်း",
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
@@ -171,31 +168,31 @@ class DetailScreen extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: 20,
+                  height:10,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      controller.selectedItem.value.deliverytime,
-                      style: TextStyle(
-                          decoration: TextDecoration.lineThrough,
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16),
-                    ),
-                    Text(
-                      "${controller.selectedItem.value.price} Kyats",
-                      style: TextStyle(
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Text(
+                //       controller.selectedItem.value.deliverytime,
+                //       style: TextStyle(
+                //           decoration: TextDecoration.lineThrough,
+                //           color: Colors.red,
+                //           fontWeight: FontWeight.bold,
+                //           fontSize: 16),
+                //     ),
+                //     Text(
+                //       "${controller.selectedItem.value.price} Kyats",
+                //       style: TextStyle(
+                //           color: Colors.red,
+                //           fontWeight: FontWeight.bold,
+                //           fontSize: 16),
+                //     ),
+                //   ],
+                // ),
+                // SizedBox(
+                //   height: 10,
+                // ),
                 ExpandedWidget(
                   text: controller.selectedItem.value.desc,
                 ),
@@ -267,7 +264,7 @@ class DetailScreen extends StatelessWidget {
                           height: 5,
                         ),
                         Text(
-                          "     09 7777 0 222 8",
+                          "     099 7511 4498",
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
@@ -289,7 +286,7 @@ class DetailScreen extends StatelessWidget {
                         child: CachedNetworkImage(
                           imageUrl: controller.selectedItem.value.photo2,
                           width: 150,
-                          height: 200,
+                          height: 150,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -308,7 +305,7 @@ class DetailScreen extends StatelessWidget {
                               child: CachedNetworkImage(
                                 imageUrl: controller.selectedItem.value.photo3,
                                 width: 150,
-                                height: 200,
+                                height: 150,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -318,57 +315,57 @@ class DetailScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      "🏠 Shop - 1  ( Thanlyin )",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      'အမှတ် 116 ၊ သတိပဌာန်လမ်း ၊ မြို့မတောင်ရပ်ကွက် ၊ သန်လျင်မြို့နယ် ၊ ရန်ကုန်မြို့။',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black,
-                      ),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      "🏠 Shop - 2  ( Dawbon )",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      'အမှတ် 192 ၊ ယမုံနာလမ်း ၊ ဇေယျာသီရိရပ်ကွက်, ဒေါပုံမြို့နယ် ။ (မာန်ပြေကားဂိတ်နားမရောက်ခင်...ဇေယျာသီရိ ၈ လမ်းထိပ်)',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black,
-                      ),
-                    )
-                  ],
-                ),
+                // Column(
+                //   crossAxisAlignment: CrossAxisAlignment.start,
+                //   mainAxisAlignment: MainAxisAlignment.start,
+                //   children: [
+                //     Text(
+                //       "🏠 Shop - 1  ( Thanlyin )",
+                //       style: TextStyle(
+                //         fontSize: 16,
+                //         fontWeight: FontWeight.bold,
+                //         color: Colors.grey,
+                //       ),
+                //     ),
+                //     SizedBox(
+                //       height: 5,
+                //     ),
+                //     Text(
+                //       'အမှတ် 116 ၊ သတိပဌာန်လမ်း ၊ မြို့မတောင်ရပ်ကွက် ၊ သန်လျင်မြို့နယ် ၊ ရန်ကုန်မြို့။',
+                //       style: TextStyle(
+                //         fontSize: 15,
+                //         color: Colors.black,
+                //       ),
+                //     )
+                //   ],
+                // ),
+                // SizedBox(
+                //   height: 20,
+                // ),
+                // Column(
+                //   crossAxisAlignment: CrossAxisAlignment.start,
+                //   mainAxisAlignment: MainAxisAlignment.start,
+                //   children: [
+                //     Text(
+                //       "🏠 Shop - 2  ( Dawbon )",
+                //       style: TextStyle(
+                //         fontSize: 16,
+                //         fontWeight: FontWeight.bold,
+                //         color: Colors.grey,
+                //       ),
+                //     ),
+                //     SizedBox(
+                //       height: 5,
+                //     ),
+                //     Text(
+                //       'အမှတ် 192 ၊ ယမုံနာလမ်း ၊ ဇေယျာသီရိရပ်ကွက်, ဒေါပုံမြို့နယ် ။ (မာန်ပြေကားဂိတ်နားမရောက်ခင်...ဇေယျာသီရိ ၈ လမ်းထိပ်)',
+                //       style: TextStyle(
+                //         fontSize: 15,
+                //         color: Colors.black,
+                //       ),
+                //     )
+                //   ],
+                // ),
               ],
             ),
           ),
@@ -401,7 +398,7 @@ class DetailScreen extends StatelessWidget {
                         controller.selectedItem.value.price,
                       ],
                       priceString: [
-                        "၁ ထည် လက်လီ ဈေးနှုန်",
+                        "လက်လီ ဈေးနှုန်း",
                       ],
                     ),
                   );

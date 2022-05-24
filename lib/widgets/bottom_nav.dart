@@ -40,13 +40,13 @@ class BottomNav extends StatelessWidget {
                       controller.changeNav(0);
                     },
                     icon: FaIcon(
-                      FontAwesomeIcons.truck,
+                      FontAwesomeIcons.home,
                       color: controller.navIndex.value == 0
                           ? homeIndicatorColor
                           : null,
                     ),
                   ),
-                  Text("Export"),
+                  Text("Home"),
                 ],
               ),
             ),
@@ -57,14 +57,12 @@ class BottomNav extends StatelessWidget {
                     onPressed: () {
                       controller.changeNav(1);
                     },
-                    icon: FaIcon(
-                      FontAwesomeIcons.shirtsinbulk,
-                      color: controller.navIndex.value == 1
-                          ? homeIndicatorColor
-                          : null,
+                    icon: Image.asset(
+                      "assets/hotsale.png",
+                      color: controller.navIndex.value == 1 ? null : Colors.black,
                     ),
                   ),
-                  Text("Brand"),
+                  Text("Hot Sales"),
                 ],
               ),
             ),
@@ -127,14 +125,14 @@ class BottomNav extends StatelessWidget {
                       controller.changeNav(4);
                     },
                     icon: FaIcon(
-                      FontAwesomeIcons.stickyNote,
+                      FontAwesomeIcons.shoppingBag,
                       color: controller.navIndex.value == 4
                           ? homeIndicatorColor
                           : null,
                     ),
                   ),
                   Text(
-                    "Order History",
+                    "Orders",
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                   ),
