@@ -22,11 +22,13 @@ class UserProfileScreen extends StatelessWidget {
           color: Colors.black,
         ),
         title: Text(
-          "𝐂𝐢𝐧𝐝𝐲 Export & Clothing Brand Fashion",
+          "Hammies  Mandalian",
           style: TextStyle(
-            fontSize: 14,
+            fontSize: 16,
             fontWeight: FontWeight.bold,
             color: appBarTitleColor,
+            letterSpacing: 2,
+            wordSpacing: 2,
           ),
         ),
       ),
@@ -42,7 +44,7 @@ class UserProfileScreen extends StatelessWidget {
               return CachedNetworkImage(
                 imageBuilder: (context, imageProvider) {
                   return CircleAvatar(
-                    radius: 80,
+                    radius: 40,
                     backgroundImage: imageProvider,
                   );
                 },
@@ -82,7 +84,7 @@ class UserProfileScreen extends StatelessWidget {
                       ),
                     );
                   }),
-                  const SizedBox(width: 5),
+                  const SizedBox(width: 10),
                   //Icon
                   Icon(
                     FontAwesomeIcons.coins,
@@ -95,24 +97,51 @@ class UserProfileScreen extends StatelessWidget {
             const SizedBox(height: 5),
             //User Name
             Obx(() {
-              return Text(
-                _homeController.currentUser.value?.userName.toUpperCase() ?? "",
-                style: textStyleBold.copyWith(
-                  fontSize: 25,
+              return Padding(
+                padding: const EdgeInsets.only(left: 40, right: 40, bottom: 20, top: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Name   :",
+                    style: TextStyle(fontSize: 20,
+                      letterSpacing: 2,
+                      wordSpacing: 2,
+
+                    ),),
+                    Text(
+                      _homeController.currentUser.value?.userName.toUpperCase() ?? "",
+                      style: textStyleBold.copyWith(
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
                 ),
               );
             }),
             const SizedBox(height: 5),
             //User Email
             Obx(() {
-              return Text(
-                _homeController.currentUser.value?.emailAddress ?? "",
-                style: textStyleGrey.copyWith(
-                  fontSize: 20,
+              return Padding(
+                padding: const EdgeInsets.only(left: 40, right: 40,),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Email   :",
+                  style: TextStyle(fontSize: 20,
+                    letterSpacing: 2,
+                    wordSpacing: 2,
+                    ),),
+                    Text(
+                      _homeController.currentUser.value?.emailAddress ?? "",
+                      style: textStyleBold.copyWith(
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
                 ),
               );
             }),
-            const SizedBox(height: 25),
+            const SizedBox(height: 40),
             Align(
               alignment: Alignment.bottomCenter,
               child: ElevatedButton(
@@ -122,8 +151,11 @@ class UserProfileScreen extends StatelessWidget {
                   onPressed: () {
                     _homeController.logOut();
                   },
-                  child: Text("Log out",
+                  child: Text("Log Out",
                       style: TextStyle(
+                        fontSize: 16,
+                        letterSpacing: 2,
+                        wordSpacing: 2,
                         color: Colors.white,
                       ))),
             ),

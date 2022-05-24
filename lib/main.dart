@@ -13,6 +13,8 @@ import 'model/hive_purchase.dart';
 import 'model/hive_purchase_item.dart';
 import 'routes/routes.dart';
 
+// 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
+
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   print('Handling a background message ${message.messageId}');
