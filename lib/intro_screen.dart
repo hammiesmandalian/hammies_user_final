@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hammies_user/routes/routes.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 import 'screen/home_screen.dart';
@@ -6,15 +8,15 @@ import 'screen/home_screen.dart';
 class OnBoardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => IntroductionScreen(
-          pages: [
-            PageViewModel(
-              title: "",
-              body: ''' 🐹 Hammies Mandalian 🐹 မှ
+        pages: [
+          PageViewModel(
+            title: "",
+            body: ''' 🐹 Hammies Mandalian 🐹 မှ
 
 နွေးထွေးစွာ ကြိုဆိုလိုက်ပါတယ် 🇲🇲 ''',
-              image: buildImage('assets/1.png'),
-              decoration: getPageDecoration(),
-            ),
+            //image: buildImage('assets/1.png'),
+            decoration: getPageDecoration(),
+          ),
 //             PageViewModel(
 //               title: "Hammies Mandalian Accessories & Food",
 //               body: '''
@@ -48,48 +50,45 @@ class OnBoardingPage extends StatelessWidget {
           //     image: buildImage('assets/4.png'),
           //     decoration: getPageDecoration(),
           //   ),
-            PageViewModel(
-              title: '',
-              body: '''  🐹Hammies Mandalian 🐹
+          PageViewModel(
+            title: '',
+            body: '''  🐹Hammies Mandalian 🐹
 
 ❝  Hamster Food and Accessories “မျိုးစုံကို
 
 တစ်နေရာတည်းမှာ မိမိစိတ်ကြိုက်
 
 ဝယ်ယူနိုင်ပါပြီ  ❞ ''',
-              footer: ButtonWidget(
-                  text: "LET'S GET STARTED",
-                  onClicked: () => goToHome(context),
-                ),
-
-              image: buildImage('assets/2.jpeg'),
-              decoration: getPageDecoration(),
+            footer: ButtonWidget(
+              text: "LET'S GET STARTED",
+              onClicked: () => goToHome(context),
             ),
-          ],
-          done: Text("", style: TextStyle(fontWeight: FontWeight.w600)),
-          onDone: () => goToHome(context),
-          showSkipButton: true,
-          skip: Text(
-            'SKIP',
-            style: TextStyle(fontSize: 16, color: Colors.orange),
+           // image: buildImage('assets/2.jpeg'),
+            decoration: getPageDecoration(),
           ),
-          onSkip: () => goToHome(context),
-          next: Icon(Icons.forward_outlined, size: 30, color: Colors.orange),
-          dotsDecorator: getDotDecoration(),
-          onChange: (index) => print('Page $index selected'),
-          globalBackgroundColor: Colors.white,
-          skipFlex: 0,
-          nextFlex: 0,
-          // isProgressTap: false,
-          // isProgress: false,
-          // showNextButton: true,
-          // freeze: true,
-          // animationDuration: 1000,
-        );
-
-  void goToHome(context) => Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => HomeScreen()),
+        ],
+        done: Text("", style: TextStyle(fontWeight: FontWeight.w600)),
+        onDone: () => goToHome(context),
+        showSkipButton: true,
+        skip: Text(
+          'SKIP',
+          style: TextStyle(fontSize: 16, color: Colors.orange),
+        ),
+        onSkip: () => goToHome(context),
+        next: Icon(Icons.forward_outlined, size: 30, color: Colors.orange),
+        dotsDecorator: getDotDecoration(),
+        onChange: (index) => print('Page $index selected'),
+        globalBackgroundColor: Colors.white,
+        skipFlex: 0,
+        nextFlex: 0,
+        // isProgressTap: false,
+        // isProgress: false,
+        // showNextButton: true,
+        // freeze: true,
+        // animationDuration: 1000,
       );
+
+  void goToHome(context) => Get.offNamed(redirectRoute());
 
   Widget buildImage(String path) =>
       Center(child: Image.asset(path, width: 300));

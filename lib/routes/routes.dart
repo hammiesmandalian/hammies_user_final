@@ -1,6 +1,9 @@
+import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
+import 'package:hammies_user/screen/login_screen.dart';
 import 'package:hammies_user/screen/reward_product_see_all.dart';
 
+import '../controller/home_controller.dart';
 import '../intro_screen.dart';
 import '../screen/blue_tooth_screen.dart';
 import '../screen/check_out_screen.dart';
@@ -21,6 +24,16 @@ const String blueToothScreen = '/bluetooth-screen';
 const String searchScreen = '/searchScreen';
 const String userProfileUrl = "/user_profile";
 const String rewardProducts = "/reward_products";
+const String loginScreen = "/login_screen";
+
+HomeController controller = Get.find();
+String redirectRoute() {
+  if (controller.currentUser.value == null) {
+    return loginScreen;
+  } else {
+    return homeScreen;
+  }
+}
 
 List<GetPage> routes = [
   GetPage(
@@ -42,6 +55,10 @@ List<GetPage> routes = [
   GetPage(
     name: rewardProducts,
     page: () => RewardProductSeeAll(),
+  ),
+  GetPage(
+    name: loginScreen,
+    page: () => LoginScreen(),
   ),
   /* GetPage(
     name: uploadItemScreen,

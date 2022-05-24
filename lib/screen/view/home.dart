@@ -20,16 +20,18 @@ class HomeView extends StatelessWidget {
     final HomeController controller = Get.find();
     return Scaffold(
       backgroundColor: Colors.white,
-      body: ListView(
-        children: [
-          HomePickUp(),
-          HomeReward(),
-          const SizedBox(
-            height: 10,
-          ),
-          HomeCategory(),
-          HomeItems(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            HomePickUp(),
+            HomeReward(),
+            const SizedBox(
+              height: 10,
+            ),
+            HomeCategory(),
+            HomeItems(),
+          ],
+        ),
       ),
     );
   }

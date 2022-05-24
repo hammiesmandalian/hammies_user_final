@@ -718,7 +718,7 @@ class HomeController extends GetxController {
 
     _auth.onAuthChange().listen((user) async {
       if (user == null) {
-        await signInAnonymous();
+        currentUser.value = null;
       } else {
         if (!(user.photoURL == null)) {
           debugPrint("*******photo is not null****");
@@ -875,7 +875,7 @@ class HomeController extends GetxController {
       // Once signed in, return the UserCredential
       await FirebaseAuth.instance.signInWithCredential(credential);
       hideLoading();
-      Get.toNamed(redirectRouteUrl);
+      Get.offNamed(redirectRouteUrl);
     } catch (e) {
       hideLoading();
     }
@@ -886,6 +886,6 @@ class HomeController extends GetxController {
     await FirebaseAuth.instance.signOut();
     hideLoading();
     currentUser.value = null;
-    Get.offNamed(homeScreen);
+    Get.offNamed(introScreen);
   }
 }

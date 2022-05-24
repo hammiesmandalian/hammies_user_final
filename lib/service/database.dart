@@ -60,9 +60,9 @@ class Database {
                 .then((value) async {
               //We send push after order is uploaded
               if (!(model.items == null)) {
-                int totalCount = 0;
+                int totalPay = 0;
                 for (var item in model.items!) {
-                  totalCount += item.count;
+                  totalPay += item.count * item.price;
                 }
                 try {
                   for (PurchaseItem item in model.items!) {
@@ -71,7 +71,8 @@ class Database {
                     await updateTotalForDaily(item);
                     await updateTotalForMonthly(item);
                   }
-                  await increaseCurrentUserPoint(totalCount * 10);
+                  await increaseCurrentUserPoint(
+                      (totalPay / 1000).round() * 10);
                 } catch (e) {
                   debugPrint("********SalesUpdateFailed: $e**");
                 }
@@ -106,9 +107,9 @@ class Database {
             .then((value) async {
           //We send push after order is uploaded
           if (!(model.items == null)) {
-            int totalCount = 0;
+            int totalPay = 0;
             for (var item in model.items!) {
-              totalCount += item.count;
+              totalPay += item.count * item.price;
             }
             try {
               for (PurchaseItem item in model.items!) {
@@ -117,7 +118,7 @@ class Database {
                 await updateTotalForDaily(item);
                 await updateTotalForMonthly(item);
               }
-              await increaseCurrentUserPoint(totalCount * 10);
+              await increaseCurrentUserPoint((totalPay / 1000).round() * 10);
             } catch (e) {
               debugPrint("********SalesUpdateFailed: $e**");
             }
