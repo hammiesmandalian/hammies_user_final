@@ -7,18 +7,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:88132190074:android:e1924c57ebfa7a070360c3",
+        "mobilesdk_app_id": "1:88132190074:android:282db47c5dd615050360c3",
         "android_client_info": {
-          "package_name": "com.example.hammies_user"
+          "package_name": "com.kzn.hm"
         }
       },
       "oauth_client": [
         {
-          "client_id": "88132190074-tltau43tpigadrg7aru73i0ockan80u6.apps.googleusercontent.com",
+          "client_id": "88132190074-s8rkjk1f42c8isk5k9h15nl93kv216t4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.hammies_user",
-            "certificate_hash": "852de4c064b63bffb1363b9bf20a351389ca71b0"
+            "package_name": "com.kzn.hm",
+            "certificate_hash": "e17daea38df4a03ba76494856f8094fe5d27d6f8"
           }
         },
         {
