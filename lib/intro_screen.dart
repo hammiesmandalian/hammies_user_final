@@ -14,7 +14,7 @@ class OnBoardingPage extends StatelessWidget {
             body: ''' 🐹 Hammies Mandalian 🐹 မှ
 
 နွေးထွေးစွာ ကြိုဆိုလိုက်ပါတယ် 🇲🇲 ''',
-            //image: buildImage('assets/1.png'),
+            image: buildImage('assets/1.png'),
             decoration: getPageDecoration(),
           ),
 //             PageViewModel(
@@ -63,7 +63,7 @@ class OnBoardingPage extends StatelessWidget {
               text: "LET'S GET STARTED",
               onClicked: () => goToHome(context),
             ),
-           // image: buildImage('assets/2.jpeg'),
+           image: buildImage('assets/2.jpeg'),
             decoration: getPageDecoration(),
           ),
         ],
@@ -81,11 +81,11 @@ class OnBoardingPage extends StatelessWidget {
         globalBackgroundColor: Colors.white,
         skipFlex: 0,
         nextFlex: 0,
-        // isProgressTap: false,
-        // isProgress: false,
-        // showNextButton: true,
-        // freeze: true,
-        // animationDuration: 1000,
+        isProgressTap: false,
+        isProgress: false,
+        showNextButton: true,
+        freeze: true,
+        animationDuration: 1000,
       );
 
   void goToHome(context) => Get.offNamed(redirectRoute());

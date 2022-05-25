@@ -59,13 +59,13 @@ class OrderHistory extends StatelessWidget {
                                       }
                                     }
                                     return ListTile(
-                                      title: Text(
-                                          "ကုန်ပစ္စည်းအရေအတွက် = $totalCountခု"),
+                                      title: Text("${purchase.totalPrice} ကျပ်",
+                                      style: TextStyle(fontSize: 14),),
                                       subtitle: Text(
-                                          "${purchase.totalPrice} ကျပ် "
-                                          "ပို့ခ ${purchase.deliveryTownshipInfo[1]}ကျပ် ပေါင်းပြီး"),
-                                      trailing: Text(
-                                          "${purchase.dateTime.day}/${purchase.dateTime.month}/${purchase.dateTime.year}"),
+                                          "${purchase.deliveryTownshipInfo[0]} ပေါင်းပြီး",
+                                        style: TextStyle(fontSize: 12),),
+                                      trailing: Text("${purchase.dateTime.day}/${purchase.dateTime.month}/${purchase.dateTime.year}",
+                                      style: TextStyle(fontSize: 15),),
                                     );
                                   },
                                   body: Column(
@@ -82,51 +82,58 @@ class OrderHistory extends StatelessWidget {
                                             itemBuilder: (_, o) => Padding(
                                               padding:
                                                   const EdgeInsets.only(top: 5),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                              child: Column(
                                                 children: [
-                                                  Text(
-                                                    "${o + 1}. ${purchase.items![o].itemName}",
-                                                    style:
-                                                        TextStyle(fontSize: 12),
-                                                  ),
-                                                  // Text(
-                                                  //   "${purchase.items[o].toString().split(',')[1]}",
-                                                  //   style: TextStyle(fontSize: 10),
-                                                  //   overflow: TextOverflow.ellipsis,
-                                                  //   maxLines: 1,
-                                                  // ),
-                                                  SizedBox(
-                                                    width: 25,
-                                                  ),
-                                                  Expanded(
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          "${purchase.items![o].color}",
-                                                          style: TextStyle(
-                                                              fontSize: 10),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceAround,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
+                                                    children: [
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 20),
+                                                        child: SizedBox(
+                                                          width: 170,
+                                                          child: Text(
+                                                            "${o + 1}. ${purchase.items![o].itemName}",
+                                                            style:
+                                                                TextStyle(fontSize: 14),
+                                                          ),
                                                         ),
-                                                        Text(
-                                                          "${purchase.items![o].size}",
-                                                          style: TextStyle(
-                                                              fontSize: 10),
-                                                        )
-                                                      ],
-                                                    ),
+                                                      ),
+
+                                                      Expanded(
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              "${purchase.items![o].color}",
+                                                              style: TextStyle(
+                                                                  fontSize: 14),
+                                                            ),
+                                                            Text(
+                                                              "${purchase.items![o].size}",
+                                                              style: TextStyle(
+                                                                  fontSize: 14),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(right: 20),
+                                                        child: Text(
+                                                          "${purchase.items![o].price} x  ${purchase.items![o].count} ",
+                                                          style:
+                                                              TextStyle(fontSize: 14),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
-                                                  Text(
-                                                    "${purchase.items![o].price} x  ${purchase.items![o].count} ထည်",
-                                                    style:
-                                                        TextStyle(fontSize: 10),
-                                                  ),
+
+
                                                 ],
                                               ),
                                             ),

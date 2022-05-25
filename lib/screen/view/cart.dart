@@ -201,14 +201,14 @@ class CartView extends StatelessWidget {
                         Text(
                           "ကုန်ပစ္စည်းအတွက် ကျသင့်ငွေ",
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 13,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
                         Text(
                           "${controller.subTotal} ကျပ်",
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 13,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
@@ -227,7 +227,7 @@ class CartView extends StatelessWidget {
 
                         //DropDown TownShip List
                         Container(
-                          width: 200,
+                          width: 250,
                           height: 50,
                           child:
                               GetBuilder<HomeController>(builder: (controller) {
@@ -249,7 +249,7 @@ class CartView extends StatelessWidget {
                                         "မြို့နယ်",
                                     maxLines: 1,
                                     style: TextStyle(
-                                      fontSize: 12
+                                      fontSize: 13
                                     ),
                                   ),
                                 ),
@@ -266,21 +266,11 @@ class CartView extends StatelessWidget {
                           return Row(
                             children: [
                               Text(
-                                "ပို့ဆောင်စရိတ်",
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Text(
                                 controller.townShipNameAndFee.isEmpty
                                     ? "0 ကျပ်"
                                     : " ${controller.townShipNameAndFee["fee"]} ကျပ်",
                                 style: TextStyle(
-                                  fontSize: 12,
+                                  fontSize: 13,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
@@ -351,7 +341,7 @@ class CartView extends StatelessWidget {
                   backgroundColor: Colors.white70,
                   titlePadding: EdgeInsets.all(8),
                   contentPadding: EdgeInsets.all(0),
-                  title: "Choose Options",
+                  title: "ရွေးချယ်ရန်",
                   content: PaymentOptionContent(),
                   barrierDismissible: false,
                   confirm: nextButton(),
@@ -420,7 +410,10 @@ class CartView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                     //Text
-                    Text(divisionList[divisionIndex].name),
+                    Text(divisionList[divisionIndex].name, style: TextStyle(
+                      color: controller.mouseIndex == divisionIndex
+                    ? Colors.white
+                        : Colors.black,),),
                     SizedBox(width: 10),
                     Icon(FontAwesomeIcons.angleRight),
                   ]),
@@ -438,8 +431,8 @@ class CartView extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
-        width: 300,
-        height: MediaQuery.of(Get.context!).size.height * 0.5,
+        width: 400,
+        height: MediaQuery.of(Get.context!).size.height,
         decoration: BoxDecoration(
           border: Border(
             top: BorderSide(),
@@ -532,7 +525,7 @@ Widget nextButton() {
           Get.toNamed(checkOutScreen);
         }
       },
-      child: Text("Next  ➡", style: TextStyle(color: Colors.white)),
+      child: Text("OK", style: TextStyle(color: Colors.white, fontSize: 16)),
     ),
   );
 }

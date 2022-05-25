@@ -43,7 +43,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),*/
                   SizedBox(
-                    height: 20.0,
+                    height: 50.0,
                   ),
                   Container(
                     width: Get.width - 100,
@@ -52,7 +52,7 @@ class LoginScreen extends StatelessWidget {
                       child: Card(
                         color: homeIndicatorColor,
                         child: Padding(
-                          padding: const EdgeInsets.all(12.0),
+                          padding: const EdgeInsets.all(15.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
