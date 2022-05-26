@@ -10,10 +10,8 @@ class OnBoardingPage extends StatelessWidget {
   Widget build(BuildContext context) => IntroductionScreen(
         pages: [
           PageViewModel(
-            title: "",
-            body: ''' 🐹 Hammies Mandalian 🐹 မှ
-
-နွေးထွေးစွာ ကြိုဆိုလိုက်ပါတယ် 🇲🇲 ''',
+            title: "🐹 Hammies Mandalian 🐹 မှ",
+            body: '''နွေးထွေးစွာ ကြိုဆိုလိုက်ပါတယ် 🇲🇲 ''',
             image: buildImage('assets/1.png'),
             decoration: getPageDecoration(),
           ),
@@ -51,10 +49,8 @@ class OnBoardingPage extends StatelessWidget {
           //     decoration: getPageDecoration(),
           //   ),
           PageViewModel(
-            title: '',
-            body: '''  🐹Hammies Mandalian 🐹
-
-❝  Hamster Food and Accessories “မျိုးစုံကို
+            title: '🐹 Hammies Mandalian 🐹',
+            body: '''❝  Hamster Food and Accessories “မျိုးစုံကို
 
 တစ်နေရာတည်းမှာ မိမိစိတ်ကြိုက်
 
@@ -63,7 +59,7 @@ class OnBoardingPage extends StatelessWidget {
               text: "LET'S GET STARTED",
               onClicked: () => goToHome(context),
             ),
-           image: buildImage('assets/2.jpeg'),
+           image: buildImage('assets/2.png'),
             decoration: getPageDecoration(),
           ),
         ],
@@ -81,17 +77,17 @@ class OnBoardingPage extends StatelessWidget {
         globalBackgroundColor: Colors.white,
         skipFlex: 0,
         nextFlex: 0,
-        isProgressTap: false,
-        isProgress: false,
+        isProgressTap: true,
+        isProgress: true,
         showNextButton: true,
-        freeze: true,
-        animationDuration: 1000,
+        // freeze: true,
+        animationDuration: 100,
       );
 
   void goToHome(context) => Get.offNamed(redirectRoute());
 
   Widget buildImage(String path) =>
-      Center(child: Image.asset(path, width: 300));
+      Center(child: Image.asset(path, width: 400));
 
   DotsDecorator getDotDecoration() => DotsDecorator(
         color: Colors.indigo,
@@ -104,10 +100,10 @@ class OnBoardingPage extends StatelessWidget {
       );
 
   PageDecoration getPageDecoration() => PageDecoration(
-        titleTextStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-        titlePadding: EdgeInsets.only(top: 20),
-        // descriptionPadding: EdgeInsets.only(top: 30).copyWith(bottom: 0),
-        imagePadding: EdgeInsets.only(top: 100),
+        titleTextStyle: TextStyle(fontSize: 18),
+        titlePadding: EdgeInsets.only(top: 0),
+        descriptionPadding: EdgeInsets.only(top: 20).copyWith(bottom: 0),
+        // imagePadding: EdgeInsets.only(top: 100),
         pageColor: Colors.white,
       );
 }
@@ -128,8 +124,7 @@ class ButtonWidget extends StatelessWidget {
         color: Colors.orange,
         shape: StadiumBorder(),
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        child: Text(
-          text,
+        child: Text(text,
           style: TextStyle(color: Colors.white, fontSize: 16),
         ),
       );

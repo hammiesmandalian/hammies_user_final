@@ -71,7 +71,7 @@ class HotView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "${controller.hot()[i].originalPrice}  Ks",
+                        "${controller.hot()[i].price}  Ks",
                         style: TextStyle(
                           color: Colors.red,
                           fontSize: 17,
@@ -83,7 +83,7 @@ class HotView extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        "${controller.hot()[i].price}  Ks",
+                        "${((controller.hot()[i].price)*(20/100)).round() + controller.hot()[i].price}   Ks",
                         style: TextStyle(
                           decoration: TextDecoration.lineThrough,
                           color: Colors.red,

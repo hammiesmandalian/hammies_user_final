@@ -162,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: FaIcon(
                 FontAwesomeIcons.search,
                 color: Colors.black,
-                size: 20,
+                size: 22,
               ),
             ),
           ),
@@ -191,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: FaIcon(
               FontAwesomeIcons.facebookMessenger,
               color: Colors.blue,
-              size: 20,
+              size: 22,
             ),
           ),
           //User Profile

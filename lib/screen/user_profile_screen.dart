@@ -111,7 +111,7 @@ class UserProfileScreen extends StatelessWidget {
                     Text(
                       _homeController.currentUser.value?.userName.toUpperCase() ?? "",
                       style: textStyleBold.copyWith(
-                        fontSize: 20,
+                        fontSize: 18,
                       ),
                     ),
                   ],

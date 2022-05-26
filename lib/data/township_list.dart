@@ -92,4 +92,15 @@ final List<Division> divisionList = [
       ]
     },
   ),
+
+  Division(
+    name: "ဂိတ်ချ",
+    townShipMap: {
+      "1500": [
+        "ဂိတ်ချ ပို့ခ ၁၅၀၀ ကျပ်",
+      ],
+    },
+  ),
+
 ];
+

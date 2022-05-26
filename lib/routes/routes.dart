@@ -5,7 +5,6 @@ import 'package:hammies_user/screen/reward_product_see_all.dart';
 
 import '../controller/home_controller.dart';
 import '../intro_screen.dart';
-import '../screen/blue_tooth_screen.dart';
 import '../screen/check_out_screen.dart';
 import '../screen/detail_screen.dart';
 import '../screen/home_screen.dart';
@@ -74,10 +73,10 @@ List<GetPage> routes = [
     name: purchaseScreen,
     page: () => PurchaseScreen(),
   ),
-  GetPage(
-    name: blueToothScreen,
-    page: () => BlueToothPrintScreen(),
-  ),
+  // GetPage(
+  //   name: blueToothScreen,
+  //   page: () => BlueToothPrintScreen(),
+  // ),
   GetPage(
     name: searchScreen,
     page: () => SearchScreen(),
