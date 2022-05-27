@@ -228,7 +228,7 @@ class DetailScreen extends StatelessWidget {
                     Column(
                       children: [
                         Text(
-                          "💁 Availability ",
+                          "🛍️ Address",
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
@@ -239,7 +239,7 @@ class DetailScreen extends StatelessWidget {
                           height: 5,
                         ),
                         Text(
-                          "In Stock",
+                          "Mandalay",
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,

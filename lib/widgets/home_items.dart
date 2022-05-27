@@ -7,6 +7,7 @@ import 'package:hammies_user/model/item.dart';
 import 'package:hammies_user/utils/widget/widget.dart';
 
 import '../controller/home_controller.dart';
+import '../data/constant.dart';
 import '../routes/routes.dart';
 
 class HomeItems extends StatelessWidget {
@@ -42,7 +43,7 @@ class HomeItems extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       color: Colors.white,
                       border: Border.all(
-                        color: Colors.black,
+                        color: homeIndicatorColor,
                       )),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

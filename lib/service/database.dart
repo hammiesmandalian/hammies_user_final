@@ -72,7 +72,7 @@ class Database {
                     await updateTotalForMonthly(item);
                   }
                   await increaseCurrentUserPoint(
-                      (totalPay / 1000).round() * 10);
+                      int.parse("${totalPay / 100}".split('.').first));
                 } catch (e) {
                   debugPrint("********SalesUpdateFailed: $e**");
                 }
@@ -118,7 +118,8 @@ class Database {
                 await updateTotalForDaily(item);
                 await updateTotalForMonthly(item);
               }
-              await increaseCurrentUserPoint((totalPay / 1000).round() * 10);
+              await increaseCurrentUserPoint(
+                  int.parse("${totalPay / 100}".split('.').first));
             } catch (e) {
               debugPrint("********SalesUpdateFailed: $e**");
             }

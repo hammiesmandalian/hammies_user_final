@@ -74,7 +74,7 @@ class HotView extends StatelessWidget {
                         "${controller.hot()[i].price}  Ks",
                         style: TextStyle(
                           color: Colors.red,
-                          fontSize: 17,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -87,7 +87,7 @@ class HotView extends StatelessWidget {
                         style: TextStyle(
                           decoration: TextDecoration.lineThrough,
                           color: Colors.red,
-                          fontSize: 15,
+                          fontSize: 13,
                           fontWeight: FontWeight.w400,
                         ),
                       ),

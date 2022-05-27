@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:hammies_user/controller/home_controller.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../data/constant.dart';
 import '../../model/item.dart';
 
 var notOutOfStockBox = BoxDecoration(
@@ -44,7 +45,7 @@ SizedBox addButton(ItemModel model) {
               topRight: Radius.circular(10),
               bottomRight: Radius.circular(10),
             ),
-            color: Colors.black87,
+            color: homeIndicatorColor,
           ),
           child: IconButton(
               onPressed: () {
