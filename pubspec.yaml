@@ -69,7 +69,7 @@ dependencies:
   freezed_annotation: ^1.1.0
   getwidget: ^2.0.5
   shimmer: ^2.0.0
-  google_sign_in: ^4.0.6
+  google_sign_in:
   colours: ^0.0.2
   
 dev_dependencies:
