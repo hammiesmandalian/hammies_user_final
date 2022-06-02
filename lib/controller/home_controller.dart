@@ -877,6 +877,7 @@ class HomeController extends GetxController {
       hideLoading();
       Get.offNamed(redirectRouteUrl);
     } catch (e) {
+      debugPrint("*******$e");
       hideLoading();
     }
   }
@@ -884,6 +885,26 @@ class HomeController extends GetxController {
   Future<void> logOut() async {
     showLoading();
     await FirebaseAuth.instance.signOut();
+    hideLoading();
+    currentUser.value = null;
+    Get.offNamed(introScreen);
+  }
+
+  Future<void> deleteAccount() async{
+    showLoading();
+   await _database.delete(normalUserCollection, path: currentUser.value!.id)
+    .then((value) async{
+      try {
+        await FirebaseAuth.instance.currentUser?.delete();
+      }on FirebaseAuthException catch (e){
+        if (e.code == "requires-recent-login") {
+          //TODO: WE NEED TO PROMPT TO REAUTHENTICATE,then delete() again
+          debugPrint("**********${e.code}");
+          return;
+        }
+        debugPrint("**********${e.code}");
+      }
+    });
     hideLoading();
     currentUser.value = null;
     Get.offNamed(introScreen);

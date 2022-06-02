@@ -102,16 +102,20 @@ class UserProfileScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Name   :",
-                    style: TextStyle(fontSize: 20,
-                      letterSpacing: 2,
-                      wordSpacing: 2,
-
-                    ),),
-                    Text(
-                      _homeController.currentUser.value?.userName.toUpperCase() ?? "",
-                      style: textStyleBold.copyWith(
-                        fontSize: 18,
+                    Expanded(
+                      child: Text("Name   :",
+                      style: TextStyle(fontSize: 20,
+                        letterSpacing: 2,
+                        wordSpacing: 2,
+                    
+                      ),),
+                    ),
+                    Expanded(
+                      child: Text(
+                        _homeController.currentUser.value?.userName.toUpperCase() ?? "",
+                        style: textStyleBold.copyWith(
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                   ],
@@ -126,15 +130,21 @@ class UserProfileScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Email   :",
-                  style: TextStyle(fontSize: 20,
-                    letterSpacing: 2,
-                    wordSpacing: 2,
-                    ),),
-                    Text(
-                      _homeController.currentUser.value?.emailAddress ?? "",
-                      style: textStyleBold.copyWith(
-                        fontSize: 18,
+                    Expanded(
+                      child: Text("Email   :",
+                                      style: TextStyle(fontSize: 20,
+                      letterSpacing: 2,
+                      wordSpacing: 2,
+                      ),),
+                    ),
+                    Expanded(
+                      child: Text(
+                        _homeController.currentUser.value?.emailAddress ?? "",
+                        style: textStyleBold.copyWith(
+                          fontSize: 18,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ],
@@ -152,6 +162,24 @@ class UserProfileScreen extends StatelessWidget {
                     _homeController.logOut();
                   },
                   child: Text("Log Out",
+                      style: TextStyle(
+                        fontSize: 16,
+                        letterSpacing: 2,
+                        wordSpacing: 2,
+                        color: Colors.white,
+                      ))),
+            ),
+            //Delete
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.red,
+                  ),
+                  onPressed: () {
+                    _homeController.deleteAccount();
+                  },
+                  child: Text("Delete Account",
                       style: TextStyle(
                         fontSize: 16,
                         letterSpacing: 2,
