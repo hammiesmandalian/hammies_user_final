@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: appBarColor,
         elevation: 0,
         title: Text(
-          "Hammies  Mandalian",
+          "HMM contactlens",
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,

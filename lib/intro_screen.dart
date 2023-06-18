@@ -10,7 +10,7 @@ class OnBoardingPage extends StatelessWidget {
   Widget build(BuildContext context) => IntroductionScreen(
         pages: [
           PageViewModel(
-            title: "🐹 Hammies Mandalian 🐹 မှ",
+            title: "🐹 HMM contactlens 🐹 မှ",
             body: '''နွေးထွေးစွာ ကြိုဆိုလိုက်ပါတယ် 🇲🇲 ''',
             image: buildImage('assets/1.png'),
             decoration: getPageDecoration(),
@@ -49,7 +49,7 @@ class OnBoardingPage extends StatelessWidget {
           //     decoration: getPageDecoration(),
           //   ),
           PageViewModel(
-            title: '🐹 Hammies Mandalian 🐹',
+            title: '🐹 HMM contactlens 🐹',
             body: '''❝  Hamster Food and Accessories “မျိုးစုံကို
 
 တစ်နေရာတည်းမှာ မိမိစိတ်ကြိုက်
@@ -59,7 +59,7 @@ class OnBoardingPage extends StatelessWidget {
               text: "LET'S GET STARTED",
               onClicked: () => goToHome(context),
             ),
-           image: buildImage('assets/2.png'),
+            image: buildImage('assets/2.png'),
             decoration: getPageDecoration(),
           ),
         ],
@@ -124,7 +124,8 @@ class ButtonWidget extends StatelessWidget {
         color: Colors.orange,
         shape: StadiumBorder(),
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        child: Text(text,
+        child: Text(
+          text,
           style: TextStyle(color: Colors.white, fontSize: 16),
         ),
       );

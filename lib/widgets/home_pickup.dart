@@ -16,7 +16,7 @@ class HomePickUp extends StatelessWidget {
   Widget build(BuildContext context) {
     final HomeController controller = Get.find();
     final List<ItemModel> slideList = controller.pickUp();
-    return slideList.length < 0
+    return slideList.isEmpty
         ? const SizedBox()
         : Padding(
             padding: const EdgeInsets.only(
