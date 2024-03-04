@@ -29,10 +29,12 @@ class HomeItems extends StatelessWidget {
           mainAxisSpacing: 10,
           itemCount: controller.getItems().length,
           itemBuilder: (_, i) => GestureDetector(
-            onTap: () {
-              controller.setSelectedItem(controller.getItems()[i]);
-              Get.toNamed(detailScreen);
-            },
+            onTap: controller.getItems()[i].remainQuantity == 0
+                ? null
+                : () {
+                    controller.setSelectedItem(controller.getItems()[i]);
+                    Get.toNamed(detailScreen);
+                  },
             child: Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: ConstrainedBox(

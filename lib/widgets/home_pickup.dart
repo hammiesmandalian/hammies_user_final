@@ -15,7 +15,7 @@ class HomePickUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final HomeController controller = Get.find();
-    final List<ItemModel> slideList = controller.pickUp();
+    final List<Map<String, dynamic>> slideList = controller.sliders;
     return slideList.isEmpty
         ? const SizedBox()
         : Padding(
@@ -23,7 +23,7 @@ class HomePickUp extends StatelessWidget {
               bottom: 10,
             ),
             child: GFCarousel(
-              aspectRatio: 16 / 10,
+              aspectRatio: 16 / 9,
               autoPlay: true,
               viewportFraction: 1.0,
               hasPagination: true,
@@ -32,10 +32,10 @@ class HomePickUp extends StatelessWidget {
               autoPlayInterval: const Duration(seconds: 6),
               items: slideList.map((produt) {
                 return InkWell(
-                  onTap: () {
+                  /* onTap: () {
                     controller.setSelectedItem(produt);
                     Get.toNamed(detailScreen);
-                  },
+                  }, */
                   child: ClipRRect(
                     borderRadius: BorderRadius.all(
                       Radius.circular(20),
@@ -53,8 +53,8 @@ class HomePickUp extends StatelessWidget {
                       errorWidget: (context, url, whatever) {
                         return const Text("Image not available");
                       },
-                      imageUrl: produt.photo,
-                      fit: BoxFit.fill,
+                      imageUrl: produt["image"],
+                      fit: BoxFit.contain,
                     ),
 
                     //name

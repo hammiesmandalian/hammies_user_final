@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hammies_user/routes/routes.dart';
@@ -7,82 +9,74 @@ import 'screen/home_screen.dart';
 
 class OnBoardingPage extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => IntroductionScreen(
-        pages: [
-          PageViewModel(
-            title: " HMM contactlens  မှ",
-            body: '''နွေးထွေးစွာ ကြိုဆိုလိုက်ပါတယ် 🇲🇲 ''',
-            image: buildImage('assets/logo.png'),
-            decoration: getPageDecoration(),
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final TABLET = size.width > 600;
+    return IntroductionScreen(
+      pages: [
+        PageViewModel(
+          titleWidget: Text(
+            "Korea Made 💕",
+            style: TextStyle(fontSize: TABLET ? 20 : 14),
+            textAlign: TextAlign.center,
           ),
-//             PageViewModel(
-//               title: "Hammies Mandalian Accessories & Food",
-//               body: '''
-//           🐹Hammies Mandalian 🐹
-//
-// “ Hamster Food and Accessories “မျိုးစုံကို
-//
-// တစ်နေရာတည်းမှာ မိမိစိတ်ကြိုက်
-//
-// ဝယ်ယူနိုင်ပါပြီ ”''',
-//               image: buildImage('assets/2.jpeg'),
-//               decoration: getPageDecoration(),
-//             ),
-          //   PageViewModel(
-          //     title: 'EVERYTIME YOU WILL NEED MY CINDY',
-          //     body: '''
-          // 🌿  ခရီးထွက်ကြတဲ့အခါ...
-          // 🌿  Shopping ထွကိကြတဲ့အခါ...
-          // 🌿  မုန့်ထွက်စားကြတဲ့အခါ...
-          // 🌿 လျှောက်လည်တဲ့အခါတိုင်း
-          // ❝   𝐂𝐢𝐧𝐝𝐲 ကို သတိရလိုက်ပါနော်  ❞ ''',
-          //     image: buildImage('assets/2.png'),
-          //     decoration: getPageDecoration(),
-          //   ),
-          //   PageViewModel(
-          //     title: "EVERYTIME YOU WILL NEED MY CINDY",
-          //     body: '''
-          // 🌧  မိုးလေးကလဲရွာ....
-          // 💨  လေလေးကလဲတိုက်....
-          // 🤔  ဘာဝတ်ပြီး အပြင်ထွက်ရမလဲနော် ❓''',
-          //     image: buildImage('assets/4.png'),
-          //     decoration: getPageDecoration(),
-          //   ),
-          PageViewModel(
-            title: 'HMM contactlens',
-            body: '''❝  Hamster Food and Accessories “မျိုးစုံကို
-
-တစ်နေရာတည်းမှာ မိမိစိတ်ကြိုက်
-
-ဝယ်ယူနိုင်ပါပြီ  ❞ ''',
-            footer: ButtonWidget(
-              text: "LET'S GET STARTED",
-              onClicked: () => goToHome(context),
-            ),
-            image: buildImage('assets/logo.png'),
-            decoration: getPageDecoration(),
+          bodyWidget: Text(
+            'အလှတပ် မျက်ကပ်မှန် ၊ ပါဝါ မျက်ကပ်မှန်များကို ဝယ်ယူရရှိနိုင်ပါပြီ',
+            style: TextStyle(fontSize: TABLET ? 20 : 14),
+            textAlign: TextAlign.center,
           ),
-        ],
-        done: Text("", style: TextStyle(fontWeight: FontWeight.w600)),
-        onDone: () => goToHome(context),
-        showSkipButton: true,
-        skip: Text(
-          'SKIP',
-          style: TextStyle(fontSize: 16, color: Colors.orange),
+          image: buildImage('assets/logo.png'),
+          decoration: getPageDecoration(),
         ),
-        onSkip: () => goToHome(context),
-        next: Icon(Icons.forward_outlined, size: 30, color: Colors.orange),
-        dotsDecorator: getDotDecoration(),
-        onChange: (index) => print('Page $index selected'),
-        globalBackgroundColor: Colors.white,
-        skipFlex: 0,
-        nextFlex: 0,
-        isProgressTap: true,
-        isProgress: true,
-        showNextButton: true,
-        // freeze: true,
-        animationDuration: 100,
-      );
+        PageViewModel(
+          titleWidget: Text(
+            'ထူးခြားလှပတဲ့ မျက်ကပ်မှန်ဒီဇိုင်း\n'
+            'အစုံအလင်ရရှိနိုင်တဲ့ 𝐇𝐌𝐌 𝐂𝐨𝐧𝐭𝐚𝐜𝐭𝐥𝐞𝐧𝐬',
+            style: TextStyle(fontSize: TABLET ? 20 : 14),
+            textAlign: TextAlign.center,
+          ),
+          bodyWidget: TABLET
+              ? Text(
+                  'လူအများကြား ထင်ပေါ်စေဖို့ အဝတ်အစားလှလှလေး​တွေလဲ\n မလိုအပ်သလို ရုပ်ရည်အရမ်းချောမောလှပနေဖို့ မလိုပါဘူး🙅🏻‍♀\n\n'
+                  'တောက်ပလင်းလက်ပြီး ညှို့အားကောင်းတဲ့မျက်ဝန်းတစ်စုံသာ\nလိုအပ်ပါတယ် သဲလေးတို့ရေ 👁',
+                  style: TextStyle(fontSize: 20),
+                  textAlign: TextAlign.center,
+                )
+              : Text(
+                  'လူအများကြား ထင်ပေါ်စေဖို့ အဝတ်အစားလှလှလေး​တွေလဲ မလိုအပ်သလို ရုပ်ရည်အရမ်းချောမောလှပနေဖို့ မလိုပါဘူး🙅🏻‍♀\n\n'
+                  'တောက်ပလင်းလက်ပြီး ညှို့အားကောင်းတဲ့မျက်ဝန်းတစ်စုံသာလိုအပ်ပါတယ် သဲလေးတို့ရေ 👁',
+                  style: TextStyle(fontSize: 14),
+                  textAlign: TextAlign.center,
+                ),
+          footer: ButtonWidget(
+            text: "LET'S GET STARTED",
+            onClicked: () => goToHome(context),
+          ),
+          image: buildImage('assets/logo.png'),
+          decoration: getPageDecoration(),
+        ),
+      ],
+      done: Text("", style: TextStyle(fontWeight: FontWeight.w600)),
+      onDone: () => goToHome(context),
+      showSkipButton: true,
+      skip: Text(
+        'SKIP',
+        style: TextStyle(fontSize: 16, color: Colors.orange),
+      ),
+      onSkip: () => goToHome(context),
+      next: Icon(Icons.forward_outlined, size: 30, color: Colors.orange),
+      dotsDecorator: getDotDecoration(),
+      onChange: (index) => print('Page $index selected'),
+      globalBackgroundColor: Colors.white,
+      skipFlex: 0,
+      nextFlex: 0,
+      isProgressTap: true,
+      isProgress: true,
+      showNextButton: true,
+      // freeze: true,
+      animationDuration: 100,
+    );
+  }
 
   void goToHome(context) => Get.offNamed(redirectRoute());
 
@@ -123,11 +117,13 @@ class ButtonWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => RaisedButton(
+  Widget build(BuildContext context) => ElevatedButton(
         onPressed: onClicked,
-        color: Colors.orange,
-        shape: StadiumBorder(),
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.orange,
+          shape: StadiumBorder(),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        ),
         child: Text(
           text,
           style: TextStyle(color: Colors.white, fontSize: 16),

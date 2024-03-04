@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hammies_user/data/fun.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../controller/home_controller.dart';
@@ -59,13 +60,18 @@ class OrderHistory extends StatelessWidget {
                                       }
                                     }
                                     return ListTile(
-                                      title: Text("${purchase.totalPrice} ကျပ်",
-                                      style: TextStyle(fontSize: 14),),
+                                      title: Text(
+                                        "${purchase.totalPrice} ကျပ်",
+                                        style: TextStyle(fontSize: 14),
+                                      ),
                                       subtitle: Text(
-                                          "${purchase.deliveryTownshipInfo[0]} ပေါင်းပြီး",
-                                        style: TextStyle(fontSize: 12),),
-                                      trailing: Text("${purchase.dateTime.day}/${purchase.dateTime.month}/${purchase.dateTime.year}",
-                                      style: TextStyle(fontSize: 15),),
+                                        "${purchase.deliveryTownshipInfo[0]} ပေါင်းပြီး",
+                                        style: TextStyle(fontSize: 12),
+                                      ),
+                                      trailing: Text(
+                                        "${purchase.dateTime.day}/${purchase.dateTime.month}/${purchase.dateTime.year}",
+                                        style: TextStyle(fontSize: 15),
+                                      ),
                                     );
                                   },
                                   body: Column(
@@ -89,31 +95,43 @@ class OrderHistory extends StatelessWidget {
                                                         MainAxisAlignment
                                                             .spaceAround,
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       Padding(
-                                                        padding: const EdgeInsets.only(left: 20),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(left: 20),
                                                         child: SizedBox(
                                                           width: 170,
                                                           child: Text(
                                                             "${o + 1}. ${purchase.items![o].itemName}",
-                                                            style:
-                                                                TextStyle(fontSize: 14),
+                                                            style: TextStyle(
+                                                                fontSize: 14),
                                                           ),
                                                         ),
                                                       ),
-
                                                       Expanded(
                                                         child: Column(
                                                           crossAxisAlignment:
                                                               CrossAxisAlignment
                                                                   .start,
                                                           children: [
-                                                            Text(
+                                                            CircleAvatar(
+                                                              radius: 5,
+                                                              backgroundColor: Color(
+                                                                  int.tryParse(purchase
+                                                                          .items![
+                                                                              o]
+                                                                          .color) ??
+                                                                      0),
+                                                            ),
+                                                            3.v(),
+                                                            /*  Text(
                                                               "${purchase.items![o].color}",
                                                               style: TextStyle(
                                                                   fontSize: 14),
-                                                            ),
+                                                            ), */
                                                             Text(
                                                               "${purchase.items![o].size}",
                                                               style: TextStyle(
@@ -123,17 +141,18 @@ class OrderHistory extends StatelessWidget {
                                                         ),
                                                       ),
                                                       Padding(
-                                                        padding: const EdgeInsets.only(right: 20),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                right: 20),
                                                         child: Text(
                                                           "${purchase.items![o].price} x  ${purchase.items![o].count} ",
-                                                          style:
-                                                              TextStyle(fontSize: 14),
+                                                          style: TextStyle(
+                                                              fontSize: 14),
                                                         ),
                                                       ),
                                                     ],
                                                   ),
-
-
                                                 ],
                                               ),
                                             ),

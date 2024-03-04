@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:hammies_user/data/fun.dart';
 import 'package:hammies_user/model/hive_purchase_item.dart';
 import 'package:hammies_user/model/hive_reward_product.dart';
 import 'package:hammies_user/model/reward_product.dart';
@@ -13,6 +16,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
+import '../model/item_size.dart';
 import '../model/purchase_item.dart';
 
 import '../data/constant.dart';
@@ -182,12 +186,16 @@ class HomeController extends GetxController {
     bankSlipImage.value = image;
   }
 
-  void addToCart({required ItemModel itemModel, String? color, String? size}) {
+  void addToCart({required ItemModel itemModel}) {
     try {
-      final PurchaseItem _item = myCart.firstWhere((item) =>
-          item.id == itemModel.id && item.color == color && item.size == size);
+      final PurchaseItem _item = myCart.firstWhere((e) =>
+          e.id == itemModel.id &&
+          e.color == itemModel.selectedColor &&
+          e.size == itemModel.selectedSize?.size);
       myCart.value = myCart.map((element) {
-        if (_item.id == element.id) {
+        if (_item.id == element.id &&
+            _item.color == element.color &&
+            _item.size == element.size) {
           return PurchaseItem(
             id: element.id,
             itemName: element.itemName,
@@ -205,10 +213,13 @@ class HomeController extends GetxController {
         id: itemModel.id,
         itemName: itemModel.name,
         count: 1,
-        size: size ?? itemModel.size.split(",").first,
-        color: color ?? itemModel.color.split(",").first,
-        priceType: "",
-        price: itemModel.price,
+        size: itemModel.selectedSize?.size ?? "",
+        color: itemModel.selectedColor ?? "",
+        priceType:
+            (!(itemModel.discountPrice == null) && itemModel.discountPrice != 0)
+                ? "discount"
+                : "normal",
+        price: itemModel.getPrice(),
       ));
     }
   }
@@ -218,6 +229,7 @@ class HomeController extends GetxController {
   final RxList<ItemModel> exportAndBrandItems = <ItemModel>[].obs;
   final RxList<ItemModel> searchitems = <ItemModel>[].obs;
 
+  final RxList<Map<String, dynamic>> sliders = <Map<String, dynamic>>[].obs;
   //set export and brand items when edit page start
   /*void setExportAndBrandItems() {
     exportAndBrandItems.value = [];
@@ -229,97 +241,47 @@ class HomeController extends GetxController {
     });
   }*/
 
-  final Rx<ItemModel> selectedItem = ItemModel(
-    id: "",
-    photo: '',
-    photo2: '',
-    photo3: '',
-    deliverytime: '',
-    name: '',
-    price: 0,
-    color: '',
-    desc: '',
-    size: '',
-    star: 0,
-    category: '',
-    originalPrice: 0,
-    originalQuantity: 0,
-    remainQuantity: 0,
-  ).obs;
-
+  Rxn<ItemModel> selectedItem = Rxn<ItemModel>();
   void setSelectedItem(ItemModel item) {
     selectedItem.value = item;
   }
 
-  final Rx<ItemModel> editItem = ItemModel(
-    photo: '',
-    photo2: '',
-    photo3: '',
-    deliverytime: '',
-    name: '',
-    price: 0,
-    color: '',
-    desc: '',
-    size: '',
-    star: 0,
-    category: '',
-    originalPrice: 0,
-    originalQuantity: 0,
-    remainQuantity: 0,
-    id: '',
-  ).obs;
+  void changeColor(String color) {
+    selectedItem.value = selectedItem.value!.copyWith(
+      selectedColor: color,
+    );
+  }
 
+  void changeSize(ItemSize size) {
+    selectedItem.value = selectedItem.value!.copyWith(
+      selectedSize: size,
+    );
+  }
+
+  Rxn<ItemModel> editItem = Rxn<ItemModel>();
   void setEditItem(ItemModel itemModel) {
     editItem.value = itemModel;
   }
 
-  ItemModel getItem(String id) {
+  ItemModel? getItem(String id) {
+    ItemModel? itemModel;
     try {
-      return items.firstWhere((e) => e.id == id);
+      itemModel = items.firstWhere((e) => e.id == id);
     } catch (e) {
-      return ItemModel(
-        photo: '',
-        photo2: '',
-        photo3: '',
-        deliverytime: '',
-        name: '',
-        price: 0,
-        color: '',
-        desc: '',
-        size: '',
-        star: 0,
-        category: '',
-        originalPrice: 0,
-        originalQuantity: 0,
-        remainQuantity: 0,
-        id: '',
-      );
+      log("Get Item Exception: $e");
     }
+    return itemModel;
   }
 
   //Get Brand Item
-  ItemModel getBrandItem(String id) {
+  ItemModel? getBrandItem(String id) {
+    ItemModel? itemModel;
     try {
-      return brandItems.firstWhere((e) => e.id == id);
+      itemModel = brandItems.firstWhere((e) => e.id == id);
     } catch (e) {
-      return ItemModel(
-        photo: '',
-        photo2: '',
-        photo3: '',
-        deliverytime: '',
-        name: '',
-        price: 0,
-        color: '',
-        desc: '',
-        size: '',
-        star: 0,
-        category: '',
-        id: '',
-        originalPrice: 0,
-        originalQuantity: 0,
-        remainQuantity: 0,
-      );
+      log("Get Bran Item Exception: $e");
     }
+    return itemModel;
   }
 
   List<ItemModel> getItems() => category.value == 'All'
@@ -330,22 +292,22 @@ class HomeController extends GetxController {
   List<ItemModel> getBrandItems() => brandCategory.value == 'All'
       ? brandItems
       : brandItems.where((e) => e.category == brandCategory.value).toList();
-
+  RxList<String> _data = [
+    'All',
+  ].obs;
   List<String> categoryList() {
-    final List<String> _data = [
-      'All',
-    ];
+    return _data;
 
-    for (var i = 0; i < items.length; i++) {
+    /*  for (var i = 0; i < items.length; i++) {
       if (!_data.contains(items[i].category)) {
         _data.add(items[i].category);
       }
-    }
+    } */
 
-    if (items.isEmpty) {
+    /* if (items.isEmpty) {
       _data.clear();
     }
-    return _data;
+    return _data; */
   }
 
   //Brand Category List
@@ -458,10 +420,10 @@ class HomeController extends GetxController {
       photo3: model.photo3,
       name: model.name,
       deliverytime: model.deliverytime,
-      price: model.price,
+      price: model.finalPrice ?? 0,
       desc: model.desc,
-      color: model.color,
-      size: model.size,
+      color: model.selectedColor ?? "",
+      size: model.selectedSize?.size ?? "",
       star: model.star,
       category: model.category,
       originalPrice: model.originalPrice,
@@ -472,23 +434,11 @@ class HomeController extends GetxController {
 
   //Get ItemModel
   ItemModel changeItemModel(HiveItem model) {
-    return ItemModel(
-      id: model.id,
-      photo: model.photo,
-      photo2: model.photo2,
-      photo3: model.photo3,
-      name: model.name,
-      deliverytime: model.deliverytime,
-      price: model.price,
-      desc: model.desc,
-      color: model.color,
-      size: model.size,
-      star: model.star,
-      category: model.category,
-      originalPrice: model.originalPrice,
-      originalQuantity: model.originalQuantity,
-      remainQuantity: model.remainQuantity,
-    );
+    try {
+      return items.firstWhere((element) => element.id == model.id);
+    } catch (e) {
+      return brandItems.firstWhere((element) => element.id == model.id);
+    }
   }
 
   final RxList<PurchaseModel> _purchcases = <PurchaseModel>[].obs; ////
@@ -687,14 +637,26 @@ class HomeController extends GetxController {
       rewardProductList.value =
           event.docs.map((e) => RewardProduct.fromJson(e.data())).toList();
     });
+    //Sliders
+    _database.watch("sliderItems").listen((event) {
+      sliders.value = event.docs.map((e) => e.data()).toList();
+    });
+    //Categories
+    _database.watch(productCategoryCollection).listen((event) {
+      for (var element in event.docs) {
+        final Map<String, dynamic> e = element.data();
+        _data.add(e['category']);
+      }
+    });
+    //
     _database.watch(productCollection).listen((event) {
       items.value =
-          event.docs.map((e) => ItemModel.fromJson(e.data(), e.id)).toList();
+          event.docs.map((e) => ItemModel.fromJson(e.data())).toList();
     });
     //For Branch Collection
     _database.watch(brandCollection).listen((event) {
       brandItems.value =
-          event.docs.map((e) => ItemModel.fromJson(e.data(), e.id)).toList();
+          event.docs.map((e) => ItemModel.fromJson(e.data())).toList();
     });
 
     /// SIGN IN ANONYMOUSLY BECAUSE TO UPLOAD IMAGE FILE INTO FIREBASE'S STORAGE
@@ -890,13 +852,14 @@ class HomeController extends GetxController {
     Get.offNamed(introScreen);
   }
 
-  Future<void> deleteAccount() async{
+  Future<void> deleteAccount() async {
     showLoading();
-   await _database.delete(normalUserCollection, path: currentUser.value!.id)
-    .then((value) async{
+    await _database
+        .delete(normalUserCollection, path: currentUser.value!.id)
+        .then((value) async {
       try {
         await FirebaseAuth.instance.currentUser?.delete();
-      }on FirebaseAuthException catch (e){
+      } on FirebaseAuthException catch (e) {
         if (e.code == "requires-recent-login") {
           //TODO: WE NEED TO PROMPT TO REAUTHENTICATE,then delete() again
           debugPrint("**********${e.code}");

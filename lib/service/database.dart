@@ -242,7 +242,7 @@ class Database {
                   "totalOrder": totalOrder + 1,
                   "totalRevenue": totalPrice + product.price * product.count,
                   "originalTotalRevenue": totalOriginalPrice +
-                      _controller.getItem(product.id).originalPrice *
+                      _controller.getItem(product.id)!.originalPrice *
                           product.count,
                 },
               },
@@ -259,7 +259,7 @@ class Database {
                   "totalOrder": 1,
                   "totalRevenue": product.price * product.count,
                   "originalTotalRevenue":
-                      _controller.getItem(product.id).originalPrice *
+                      _controller.getItem(product.id)!.originalPrice *
                           product.count,
                 }
               },
@@ -290,7 +290,7 @@ class Database {
               "totalOrder": totalOrder + 1,
               "totalRevenue": totalPrice + product.price * product.count,
               "originalTotalRevenue": totalOriginalPrice +
-                  _controller.getItem(product.id).originalPrice * product.count,
+                  _controller.getItem(product.id)!.originalPrice * product.count,
               "dateTimeMonth": DateTime.now(),
             },
             SetOptions(merge: true));
@@ -303,7 +303,7 @@ class Database {
               "totalOrder": 1,
               "totalRevenue": product.price * product.count,
               "originalTotalRevenue":
-                  _controller.getItem(product.id).originalPrice * product.count,
+                  _controller.getItem(product.id)!.originalPrice * product.count,
               "dateTimeMonth": DateTime.now(),
             },
             SetOptions(merge: true));

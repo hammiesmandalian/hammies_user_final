@@ -4,12 +4,12 @@ import 'package:get/get.dart';
 import '../controller/home_controller.dart';
 import '../data/constant.dart';
 
-List<String> category = [
+/* List<String> category = [
   'all',
   'machine tools',
   'man',
   'woman',
-];
+]; */
 
 class HomeCategory extends StatelessWidget {
   const HomeCategory({Key? key}) : super(key: key);

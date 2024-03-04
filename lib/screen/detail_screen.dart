@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hammies_user/data/fun.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:get/get.dart';
 import '../controller/home_controller.dart';
@@ -16,7 +17,7 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final HomeController controller = Get.find();
-
+    final selectedItem = controller.selectedItem.value!;
     return Scaffold(
       backgroundColor: detailTextBackgroundColor,
       appBar: AppBar(
@@ -24,7 +25,7 @@ class DetailScreen extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.white,
         title: Text(
-          controller.selectedItem.value.name,
+          selectedItem.name,
           style: TextStyle(
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
         ),
@@ -38,36 +39,39 @@ class DetailScreen extends StatelessWidget {
                 bottomRight: Radius.circular(30),
               ),
               child: Hero(
-                tag: controller.selectedItem.value.photo,
-                child: CarouselSlider(
-                  items: [
-                    CachedNetworkImage(
-                      imageUrl: controller.selectedItem.value.photo,
-                      // "$baseUrl$itemUrl${controller.selectedItem.value.photo}/get",
-                      fit: BoxFit.fitWidth,
+                tag: selectedItem.photo,
+                child: PageStorage(
+                  bucket: PageStorageBucket(),
+                  child: CarouselSlider(
+                    items: [
+                      CachedNetworkImage(
+                        imageUrl: selectedItem.photo,
+                        // "$baseUrl$itemUrl${selectedItem.photo}/get",
+                        fit: BoxFit.fitWidth,
+                      ),
+                      CachedNetworkImage(
+                        imageUrl: selectedItem.photo2,
+                        // "$baseUrl$itemUrl${selectedItem.photo}/get",
+                        fit: BoxFit.fitWidth,
+                      ),
+                      CachedNetworkImage(
+                        imageUrl: selectedItem.photo3,
+                        // "$baseUrl$itemUrl${selectedItem.photo}/get",
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ],
+                    options: CarouselOptions(
+                      height: 300,
+                      viewportFraction: 0.8,
+                      initialPage: 0,
+                      enableInfiniteScroll: true,
+                      autoPlay: true,
+                      autoPlayInterval: Duration(seconds: 3),
+                      autoPlayAnimationDuration: Duration(milliseconds: 800),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enlargeCenterPage: true,
+                      scrollDirection: Axis.horizontal,
                     ),
-                    CachedNetworkImage(
-                      imageUrl: controller.selectedItem.value.photo2,
-                      // "$baseUrl$itemUrl${controller.selectedItem.value.photo}/get",
-                      fit: BoxFit.fitWidth,
-                    ),
-                    CachedNetworkImage(
-                      imageUrl: controller.selectedItem.value.photo3,
-                      // "$baseUrl$itemUrl${controller.selectedItem.value.photo}/get",
-                      fit: BoxFit.fitWidth,
-                    ),
-                  ],
-                  options: CarouselOptions(
-                    height: 300,
-                    viewportFraction: 0.8,
-                    initialPage: 0,
-                    enableInfiniteScroll: true,
-                    autoPlay: true,
-                    autoPlayInterval: Duration(seconds: 3),
-                    autoPlayAnimationDuration: Duration(milliseconds: 800),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enlargeCenterPage: true,
-                    scrollDirection: Axis.horizontal,
                   ),
                 ),
               ),
@@ -105,7 +109,7 @@ class DetailScreen extends StatelessWidget {
                           (index) => Icon(
                             Icons.star,
                             size: 20,
-                            color: index <= controller.selectedItem.value.star
+                            color: index <= selectedItem.star
                                 ? homeIndicatorColor
                                 : Colors.grey,
                           ),
@@ -116,8 +120,7 @@ class DetailScreen extends StatelessWidget {
                         valueListenable:
                             Hive.box<HiveItem>(boxName).listenable(),
                         builder: (context, Box<HiveItem> box, widget) {
-                          final currentObj =
-                              box.get(controller.selectedItem.value.id);
+                          final currentObj = box.get(selectedItem.id);
 
                           if (!(currentObj == null)) {
                             return IconButton(
@@ -132,10 +135,8 @@ class DetailScreen extends StatelessWidget {
                           }
                           return IconButton(
                               onPressed: () {
-                                box.put(
-                                    controller.selectedItem.value.id,
-                                    controller.changeHiveItem(
-                                        controller.selectedItem.value));
+                                box.put(selectedItem.id,
+                                    controller.changeHiveItem(selectedItem));
                               },
                               icon: Icon(
                                 Icons.favorite_outline,
@@ -146,9 +147,9 @@ class DetailScreen extends StatelessWidget {
                       ),
                     ]),
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
-                Row(
+                /*  Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
@@ -157,44 +158,119 @@ class DetailScreen extends StatelessWidget {
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
                           fontSize: 16),
+                    ), */
+                Obx(() {
+                  final item = controller.selectedItem.value!;
+                  return item.priceText();
+                }),
+                /*  ],
+                ), */
+                selectedItem.colorList?.isNotEmpty == true ? 20.v() : 0.v(),
+                selectedItem.colorList?.isNotEmpty == true
+                    ? Text(
+                        "Color",
+                        style: TextStyle(
+                            color: Colors.grey.shade700,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16),
+                      )
+                    : 0.v(),
+                10.v(),
+                //Color
+                Obx(() {
+                  final item = controller.selectedItem.value!;
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Wrap(
+                      children: (item.colorList ?? [])
+                          .map((e) => Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: CircleAvatar(
+                                    radius: 15,
+                                    backgroundColor: Colors.white,
+                                    child: InkWell(
+                                      onTap: () => controller.changeColor(e),
+                                      child: Stack(
+                                        children: [
+                                          CircleAvatar(
+                                            radius: 15,
+                                            backgroundColor:
+                                                Color(int.tryParse(e) ?? 0),
+                                          ),
+                                          item.selectedColor == e
+                                              ? CircleAvatar(
+                                                  radius: 15,
+                                                  backgroundColor: Colors.white
+                                                      .withOpacity(0.8),
+                                                  child: Icon(
+                                                    FontAwesomeIcons.check,
+                                                    color: Colors.black,
+                                                    size: 8,
+                                                  ),
+                                                )
+                                              : 0.v(),
+                                        ],
+                                      ),
+                                    )),
+                              ))
+                          .toList(),
                     ),
-                    Text(
-                      "${controller.selectedItem.value.price} Kyats",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16),
+                  );
+                }),
+                selectedItem.sizeList?.isNotEmpty == true ? 20.v() : 0.v(),
+                selectedItem.sizeList?.isNotEmpty == true
+                    ? Text(
+                        "Size",
+                        style: TextStyle(
+                            color: Colors.grey.shade700,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16),
+                      )
+                    : 0.v(),
+                10.v(),
+                //Size
+                Obx(() {
+                  final item = controller.selectedItem.value!;
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Wrap(
+                      children: (item.sizeList ?? [])
+                          .map((e) => InkWell(
+                                onTap: () => controller.changeSize(e),
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 5),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 5),
+                                  decoration: BoxDecoration(
+                                      color: item.selectedSize?.id == e.id
+                                          ? homeIndicatorColor
+                                          : Colors.white,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(5)),
+                                      border: item.selectedSize?.id == e.id
+                                          ? null
+                                          : Border.all(
+                                              width: 2,
+                                              color: Colors.grey.shade300,
+                                            )),
+                                  child: Text(
+                                    e.size,
+                                    style: TextStyle(
+                                      color: item.selectedSize?.id == e.id
+                                          ? Colors.white
+                                          : Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ))
+                          .toList(),
                     ),
-                  ],
-                ),
-                SizedBox(
-                  height:10,
-                ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     Text(
-                //       controller.selectedItem.value.deliverytime,
-                //       style: TextStyle(
-                //           decoration: TextDecoration.lineThrough,
-                //           color: Colors.red,
-                //           fontWeight: FontWeight.bold,
-                //           fontSize: 16),
-                //     ),
-                //     Text(
-                //       "${controller.selectedItem.value.price} Kyats",
-                //       style: TextStyle(
-                //           color: Colors.red,
-                //           fontWeight: FontWeight.bold,
-                //           fontSize: 16),
-                //     ),
-                //   ],
-                // ),
-                // SizedBox(
-                //   height: 10,
-                // ),
+                  );
+                }),
+                //
                 ExpandedWidget(
-                  text: controller.selectedItem.value.desc,
+                  text: selectedItem.desc,
                 ),
                 SizedBox(
                   height: 30,
@@ -284,7 +360,7 @@ class DetailScreen extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: CachedNetworkImage(
-                          imageUrl: controller.selectedItem.value.photo2,
+                          imageUrl: selectedItem.photo2,
                           width: 150,
                           height: 150,
                           fit: BoxFit.cover,
@@ -303,7 +379,7 @@ class DetailScreen extends StatelessWidget {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(20),
                               child: CachedNetworkImage(
-                                imageUrl: controller.selectedItem.value.photo3,
+                                imageUrl: selectedItem.photo3,
                                 width: 150,
                                 height: 150,
                                 fit: BoxFit.cover,
@@ -315,57 +391,6 @@ class DetailScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                // Column(
-                //   crossAxisAlignment: CrossAxisAlignment.start,
-                //   mainAxisAlignment: MainAxisAlignment.start,
-                //   children: [
-                //     Text(
-                //       "🏠 Shop - 1  ( Thanlyin )",
-                //       style: TextStyle(
-                //         fontSize: 16,
-                //         fontWeight: FontWeight.bold,
-                //         color: Colors.grey,
-                //       ),
-                //     ),
-                //     SizedBox(
-                //       height: 5,
-                //     ),
-                //     Text(
-                //       'အမှတ် 116 ၊ သတိပဌာန်လမ်း ၊ မြို့မတောင်ရပ်ကွက် ၊ သန်လျင်မြို့နယ် ၊ ရန်ကုန်မြို့။',
-                //       style: TextStyle(
-                //         fontSize: 15,
-                //         color: Colors.black,
-                //       ),
-                //     )
-                //   ],
-                // ),
-                // SizedBox(
-                //   height: 20,
-                // ),
-                // Column(
-                //   crossAxisAlignment: CrossAxisAlignment.start,
-                //   mainAxisAlignment: MainAxisAlignment.start,
-                //   children: [
-                //     Text(
-                //       "🏠 Shop - 2  ( Dawbon )",
-                //       style: TextStyle(
-                //         fontSize: 16,
-                //         fontWeight: FontWeight.bold,
-                //         color: Colors.grey,
-                //       ),
-                //     ),
-                //     SizedBox(
-                //       height: 5,
-                //     ),
-                //     Text(
-                //       'အမှတ် 192 ၊ ယမုံနာလမ်း ၊ ဇေယျာသီရိရပ်ကွက်, ဒေါပုံမြို့နယ် ။ (မာန်ပြေကားဂိတ်နားမရောက်ခင်...ဇေယျာသီရိ ၈ လမ်းထိပ်)',
-                //       style: TextStyle(
-                //         fontSize: 15,
-                //         color: Colors.black,
-                //       ),
-                //     )
-                //   ],
-                // ),
               ],
             ),
           ),
@@ -374,45 +399,29 @@ class DetailScreen extends StatelessWidget {
       bottomNavigationBar: Container(
         width: double.infinity,
         height: 65,
-        // decoration: BoxDecoration(
-        //   color: detailBackgroundColor,
-        //   borderRadius: BorderRadius.only(
-        //     topLeft: Radius.circular(20),
-        //     topRight: Radius.circular(20),
-        //   ),
-        // ),
         padding: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
-        child: ElevatedButton(
-          style: buttonStyle,
-          onPressed: controller.selectedItem.value.count! > 0
-              ? null
-              : () {
-                  Get.defaultDialog(
-                    titlePadding: EdgeInsets.all(0),
-                    contentPadding:
-                        EdgeInsets.only(left: 20, right: 20, bottom: 10),
-                    radius: 0,
-                    title: '',
-                    content: AddToCart(
-                      priceList: [
-                        controller.selectedItem.value.price,
-                      ],
-                      priceString: [
-                        "လက်လီ ဈေးနှုန်း",
-                      ],
-                    ),
-                  );
-                },
-          child: controller.selectedItem.value.count! > 0
-              ? Text("၀ယ်ယူပြီး")
-              : Text("၀ယ်ယူရန်"),
-        ),
+        child: Obx(() {
+          final item = controller.selectedItem.value!;
+          final canAdd = (item.discountPrice != 0 ||
+              (!(item.selectedColor == null) && !(item.selectedSize == null)));
+          return ElevatedButton(
+            style: canAdd ? buttonStyle : disableButtonStyle,
+            onPressed: canAdd
+                ? () {
+                    //TODO:ADD TO CART
+                    controller.addToCart(itemModel: item);
+                    Get.back();
+                  }
+                : null,
+            child: Text("၀ယ်ယူရန်"),
+          );
+        }),
       ),
     );
   }
 }
 
-class AddToCart extends StatefulWidget {
+/* class AddToCart extends StatefulWidget {
   final List<int> priceList;
   final List<String> priceString;
   const AddToCart({
@@ -443,8 +452,7 @@ class _AddToCartState extends State<AddToCart> {
           onChanged: (String? e) {
             colorValue = e;
           },
-          items: controller.selectedItem.value.color
-              .split(',')
+          items: (selectedItem.colorList ?? [])
               .map((e) => DropdownMenuItem(
                     value: e,
                     child: Text(
@@ -457,6 +465,7 @@ class _AddToCartState extends State<AddToCart> {
         SizedBox(
           height: 10,
         ),
+        //TODO:Change Size Design
         DropdownButtonFormField(
           value: sizeValue,
           hint: Text(
@@ -466,12 +475,11 @@ class _AddToCartState extends State<AddToCart> {
           onChanged: (String? e) {
             sizeValue = e;
           },
-          items: controller.selectedItem.value.size
-              .split(',')
+          items: (selectedItem.sizeList ?? [])
               .map((e) => DropdownMenuItem(
-                    value: e,
+                    value: e.size,
                     child: Text(
-                      e,
+                      e.size,
                       style: TextStyle(fontSize: 12),
                     ),
                   ))
@@ -491,12 +499,12 @@ class _AddToCartState extends State<AddToCart> {
             style: buttonStyle,
             onPressed: () {
               if (colorValue != null && sizeValue != null) {
-                //Need to increase current product's count to 1 to know added or add
-                controller.makeAdded(controller.selectedItem.value);
+                /* //Need to increase current product's count to 1 to know added or add
+                controller.makeAdded(selectedItem);
                 controller.addToCart(
-                    itemModel: controller.selectedItem.value,
+                    itemModel: selectedItem,
                     color: colorValue!,
-                    size: sizeValue!);
+                    size: sizeValue!); */
                 Get.to(HomeScreen());
               }
             },
@@ -507,3 +515,4 @@ class _AddToCartState extends State<AddToCart> {
     );
   }
 }
+ */
