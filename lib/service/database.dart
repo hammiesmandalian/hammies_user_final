@@ -55,7 +55,7 @@ class Database {
             //Then we set this user into Firestore
             await _firebaseFirestore
                 .collection(purchaseCollection)
-                .doc()
+                .doc(model.id)
                 .set(purchaseModel)
                 .then((value) async {
               //We send push after order is uploaded
@@ -102,7 +102,7 @@ class Database {
       try {
         await _firebaseFirestore
             .collection(purchaseCollection)
-            .doc()
+            .doc(model.id)
             .set(model.toJson())
             .then((value) async {
           //We send push after order is uploaded
@@ -290,7 +290,8 @@ class Database {
               "totalOrder": totalOrder + 1,
               "totalRevenue": totalPrice + product.price * product.count,
               "originalTotalRevenue": totalOriginalPrice +
-                  _controller.getItem(product.id)!.originalPrice * product.count,
+                  _controller.getItem(product.id)!.originalPrice *
+                      product.count,
               "dateTimeMonth": DateTime.now(),
             },
             SetOptions(merge: true));
@@ -303,7 +304,8 @@ class Database {
               "totalOrder": 1,
               "totalRevenue": product.price * product.count,
               "originalTotalRevenue":
-                  _controller.getItem(product.id)!.originalPrice * product.count,
+                  _controller.getItem(product.id)!.originalPrice *
+                      product.count,
               "dateTimeMonth": DateTime.now(),
             },
             SetOptions(merge: true));
