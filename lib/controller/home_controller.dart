@@ -16,6 +16,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
+import '../model/division.dart';
 import '../model/item_size.dart';
 import '../model/purchase_item.dart';
 
@@ -63,6 +64,7 @@ class HomeController extends GetxController {
   final RxList<PurchaseItem> myCart = <PurchaseItem>[].obs;
   final RxMap<String, RewardProduct> myRewardCart =
       <String, RewardProduct>{}.obs;
+  RxList<Division> divisions = <Division>[].obs;
 
   final RxList<RewardProduct> rewardProductList = <RewardProduct>[].obs;
 
@@ -657,6 +659,16 @@ class HomeController extends GetxController {
     _database.watch(brandCollection).listen((event) {
       brandItems.value =
           event.docs.map((e) => ItemModel.fromJson(e.data())).toList();
+    });
+    //Divisions
+    _database.watch("divisions").listen((event) {
+      if (event.docs.isEmpty) {
+        divisions.clear();
+      } else {
+        divisions.value =
+            event.docs.map((e) => Division.fromJson(e.data())).toList();
+      }
+      log("*****Divisions: ${divisions.length}");
     });
 
     /// SIGN IN ANONYMOUSLY BECAUSE TO UPLOAD IMAGE FILE INTO FIREBASE'S STORAGE
