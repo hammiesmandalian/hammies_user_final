@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const defaultUserProfile =
+    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png";
 const Color scaffoldBackground = Colors.white;
 const Color appBarColor = Colors.white;
 const Color appBarTitleColor = /* Color.fromRGBO(19, 19, 19, 1); */

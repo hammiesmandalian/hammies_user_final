@@ -52,17 +52,16 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
         builder: (controller) {
           return Theme(
             data: ThemeData(
-                primarySwatch: Colors.orange,
                 colorScheme: ColorScheme.light(
-                  primary: Colors.orange,
-                  secondary: Colors.orange,
-                )),
+              primary: homeIndicatorColor,
+              secondary: homeIndicatorColor,
+            )),
             child: Stepper(
               currentStep: controller.checkOutStep.value,
               controlsBuilder: (context, controlDetails) {
                 return controller.checkOutStep.value == 1
                     ? ElevatedButton(
-                        onPressed: ()  {
+                        onPressed: () {
                           //TODO: TOSUBMIT ORDER
                           if ((controller.paymentOptions !=
                                   PaymentOptions.None) &&
@@ -70,16 +69,17 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                   PaymentOptions.CashOnDelivery)) {
                             //First we need to set Image to null
                             controller.setBankSlipImage('');
-                             controller.proceedToPay();
+                            controller.proceedToPay();
                           } else if ((controller.paymentOptions !=
                                   PaymentOptions.None) &&
                               (controller.paymentOptions ==
                                   PaymentOptions.PrePay) &&
                               (controller.bankSlipImage.isNotEmpty)) {
                             //First we need to set Image to null
-                             controller.proceedToPay();
+                            controller.proceedToPay();
                           } else {
-                            debugPrint("*********Noting do....................");
+                            debugPrint(
+                                "*********Noting do....................");
                           }
                         },
                         child: Center(
@@ -129,7 +129,6 @@ Widget prePayWidget(BuildContext context) {
       //Button
       Column(
         children: [
-
           SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -206,7 +205,7 @@ Widget prePayWidget(BuildContext context) {
                     ),
                     onPressed: () {
                       Clipboard.setData(
-                          new ClipboardData(text: "28430199942903001"))
+                              new ClipboardData(text: "28430199942903001"))
                           .then((_) {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text(
@@ -250,7 +249,8 @@ Widget prePayWidget(BuildContext context) {
                       textStyle: const TextStyle(fontSize: 16),
                     ),
                     onPressed: () {
-                      Clipboard.setData(new ClipboardData(text: "0031600500005387"))
+                      Clipboard.setData(
+                              new ClipboardData(text: "0031600500005387"))
                           .then((_) {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text(
@@ -264,7 +264,6 @@ Widget prePayWidget(BuildContext context) {
             ],
           ),
           SizedBox(height: 20),
-
           OutlinedButton(
             style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
@@ -334,9 +333,9 @@ class FormWidget extends StatefulWidget {
 class _FormWidgetState extends State<FormWidget> {
   final GlobalKey<FormState> _form = GlobalKey();
   final HomeController controller = Get.find();
-  
+
   ///
-  
+
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
@@ -385,7 +384,6 @@ class _FormWidgetState extends State<FormWidget> {
                 ),
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
               child: TextFormField(
@@ -411,21 +409,18 @@ class _FormWidgetState extends State<FormWidget> {
                 ),
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
               child: TextFormField(
                 controller: emailController,
-                validator: (e) => e?.isEmpty == true
-                    ? "Remark is required"
-                    : null,
+                validator: (e) =>
+                    e?.isEmpty == true ? "Remark is required" : null,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'မှတ်ချက်',
                 ),
               ),
             ),
-
             Container(
               width: double.infinity,
               height: 50,
@@ -450,7 +445,7 @@ class _FormWidgetState extends State<FormWidget> {
                     Get.snackbar("လူကြီးမင်း Order တင်ခြင်း", 'အောင်မြင်ပါသည်');*/
                   }
                 },
-                child: Text('သိမ်းထားမည်'),
+                child: Text('ရှေ့ဆက်သွားမည်'),
               ),
             )
           ],

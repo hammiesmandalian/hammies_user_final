@@ -130,4 +130,5 @@ Widget circularNetworkImage(String url, double radius) {
     imageUrl: url,
     fit: BoxFit.fitHeight,
   );
+
 }

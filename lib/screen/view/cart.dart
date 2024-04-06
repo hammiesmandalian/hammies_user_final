@@ -344,6 +344,11 @@ class CartView extends StatelessWidget {
               foregroundColor: MaterialStateProperty.all(Colors.white),
             ),
             onPressed: () {
+              if (controller.currentUser.value == null) {
+                //TODO:Need to redirect sign in page
+                Get.toNamed(loginScreen);
+                return;
+              }
               if ((controller.myCart.isNotEmpty &&
                   !(controller.townShipNameAndFee.isEmpty))) {
                 //TODO: SHOW DIALOG TO CHOOSE OPTION,THEN GO TO CHECKOUT
@@ -400,43 +405,45 @@ class CartView extends StatelessWidget {
                 shrinkWrap: true,
                 itemCount: divisionList.length,
                 itemBuilder: (context, divisionIndex) {
-                  return MouseRegion(
-                    onHover: (event) {
-                      controller.changeMouseIndex(divisionIndex);
-                      showDialog(
-                        context: context,
-                        barrierColor: Colors.white.withOpacity(0),
-                        builder: (context) {
-                          return townShipDialog(
-                              division: divisionList[divisionIndex]);
-                        },
-                      );
-                    },
-                    onExit: (event) {
-                      // controller
-                      //   .changeMouseIndex(0);
-                      Navigator.of(context).pop();
-                    },
-                    child: AnimatedContainer(
-                      color: controller.mouseIndex == divisionIndex
-                          ? Colors.orange
-                          : Colors.white,
-                      duration: const Duration(milliseconds: 200),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            //Text
-                            Text(
-                              divisionList[divisionIndex].name,
-                              style: TextStyle(
-                                color: controller.mouseIndex == divisionIndex
-                                    ? Colors.white
-                                    : Colors.black,
+                  return Material(
+                    child: InkWell(
+                      onTap: (/* event */) {
+                        //controller.changeMouseIndex(divisionIndex);
+                        showDialog(
+                          context: context,
+                          barrierColor: Colors.white.withOpacity(0),
+                          builder: (context) {
+                            return townShipDialog(
+                                division: divisionList[divisionIndex]);
+                          },
+                        );
+                      },
+                      /* onExit: (event) {
+                        // controller
+                        //   .changeMouseIndex(0);
+                        Navigator.of(context).pop();
+                      }, */
+                      child: AnimatedContainer(
+                        color: controller.mouseIndex == divisionIndex
+                            ? Colors.orange
+                            : Colors.white,
+                        duration: const Duration(milliseconds: 200),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              //Text
+                              Text(
+                                divisionList[divisionIndex].name,
+                                style: TextStyle(
+                                  color: controller.mouseIndex == divisionIndex
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
                               ),
-                            ),
-                            SizedBox(width: 10),
-                            Icon(FontAwesomeIcons.angleRight),
-                          ]),
+                              SizedBox(width: 10),
+                              Icon(FontAwesomeIcons.angleRight),
+                            ]),
+                      ),
                     ),
                   );
                 },
@@ -534,7 +541,7 @@ Widget nextButton() {
     height: 50,
     width: double.infinity,
     decoration: BoxDecoration(
-      color: Colors.orange,
+      color: homeIndicatorColor,
       borderRadius: BorderRadius.only(
         bottomLeft: Radius.circular(20),
         bottomRight: Radius.circular(20),
@@ -545,6 +552,7 @@ Widget nextButton() {
         if (controller.paymentOptions != PaymentOptions.None) {
           //Go To CheckOut Screen
           Navigator.of(Get.context!).pop();
+          controller.changeStepIndex(0);
           Get.toNamed(checkOutScreen);
         }
       },

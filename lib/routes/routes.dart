@@ -27,11 +27,11 @@ const String loginScreen = "/login_screen";
 
 HomeController controller = Get.find();
 String redirectRoute() {
-  if (controller.currentUser.value == null) {
+  /* if (controller.currentUser.value == null) {
     return loginScreen;
-  } else {
-    return homeScreen;
-  }
+  } else { */
+  return homeScreen;
+  /*  } */
 }
 
 List<GetPage> routes = [

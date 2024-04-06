@@ -70,6 +70,7 @@ dependencies:
   shimmer: ^2.0.0
   google_sign_in:
   colours: ^0.0.2
+  sign_in_with_apple: ^3.3.0
 
 dev_dependencies:
   hive_generator: ^1.1.2

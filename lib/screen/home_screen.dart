@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hammies_user/utils/widget/widget.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../controller/home_controller.dart';
@@ -106,6 +108,8 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: appBarColor,
         elevation: 0,
+
+        centerTitle: false,
         title: Text(
           "HMM contactlens",
           style: TextStyle(
@@ -204,13 +208,49 @@ class _HomeScreenState extends State<HomeScreen> {
               }
             },
             child: Obx(() {
-              return circularNetworkImage(
-                controller.currentUser.value?.image ?? userImage,
-                12,
-              );
+              final authenticated = !(controller.currentUser.value == null);
+              return authenticated
+                  ? /* circularNetworkImage(
+                      controller.currentUser.value?.image ?? defaultUserProfile,
+                      12,
+                    ) */
+                  Container(
+                      /* color: Colors.red, */
+                      width: 30,
+                      height: 30,
+                      margin: EdgeInsets.all(12),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                        child: CachedNetworkImage(
+                          /*  imageBuilder: (context, imageProvider) {
+                            return CircleAvatar(
+                              radius: 12,
+                              backgroundImage: imageProvider,
+                            );
+                          }, */
+                          progressIndicatorBuilder: (context, url, status) {
+                            return Shimmer.fromColors(
+                              child: CircleAvatar(
+                                radius: 12,
+                                backgroundColor: Colors.white,
+                              ),
+                              baseColor: Colors.grey.shade300,
+                              highlightColor: Colors.grey.shade100,
+                            );
+                          },
+                          errorWidget: (context, url, whatever) {
+                            return const Text("Image not available");
+                          },
+                          imageUrl: controller.currentUser.value?.image ??
+                              defaultUserProfile,
+                          fit: BoxFit.fitHeight,
+                        ),
+                      ),
+                    )
+                  : const SizedBox();
             }),
           ),
-          const SizedBox(width: 10),
+          /* const SizedBox(width: 10), */
           // Container(
           //   margin: EdgeInsets.only(
           //     top: 7,

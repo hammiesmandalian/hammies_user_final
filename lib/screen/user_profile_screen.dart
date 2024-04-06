@@ -22,7 +22,7 @@ class UserProfileScreen extends StatelessWidget {
           color: Colors.black,
         ),
         title: Text(
-          "Hammies  Mandalian",
+          "HMM Contactlens",
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -98,21 +98,26 @@ class UserProfileScreen extends StatelessWidget {
             //User Name
             Obx(() {
               return Padding(
-                padding: const EdgeInsets.only(left: 40, right: 40, bottom: 20, top: 20),
+                padding: const EdgeInsets.only(
+                    left: 40, right: 40, bottom: 20, top: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      child: Text("Name   :",
-                      style: TextStyle(fontSize: 20,
-                        letterSpacing: 2,
-                        wordSpacing: 2,
-                    
-                      ),),
+                      child: Text(
+                        "Name   :",
+                        style: TextStyle(
+                          fontSize: 20,
+                          letterSpacing: 2,
+                          wordSpacing: 2,
+                        ),
+                      ),
                     ),
                     Expanded(
                       child: Text(
-                        _homeController.currentUser.value?.userName.toUpperCase() ?? "",
+                        _homeController.currentUser.value?.userName
+                                .toUpperCase() ??
+                            "",
                         style: textStyleBold.copyWith(
                           fontSize: 18,
                         ),
@@ -126,16 +131,22 @@ class UserProfileScreen extends StatelessWidget {
             //User Email
             Obx(() {
               return Padding(
-                padding: const EdgeInsets.only(left: 40, right: 40,),
+                padding: const EdgeInsets.only(
+                  left: 40,
+                  right: 40,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      child: Text("Email   :",
-                                      style: TextStyle(fontSize: 20,
-                      letterSpacing: 2,
-                      wordSpacing: 2,
-                      ),),
+                      child: Text(
+                        "Email   :",
+                        style: TextStyle(
+                          fontSize: 20,
+                          letterSpacing: 2,
+                          wordSpacing: 2,
+                        ),
+                      ),
                     ),
                     Expanded(
                       child: Text(

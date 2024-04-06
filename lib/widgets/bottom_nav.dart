@@ -43,7 +43,7 @@ class BottomNav extends StatelessWidget {
                       FontAwesomeIcons.home,
                       color: controller.navIndex.value == 0
                           ? homeIndicatorColor
-                          : null,
+                          : Colors.grey,
                     ),
                   ),
                   Text("Home"),
@@ -59,7 +59,8 @@ class BottomNav extends StatelessWidget {
                     },
                     icon: Image.asset(
                       "assets/hotsale.png",
-                      color: controller.navIndex.value == 1 ? null : Colors.black,
+                      color:
+                          controller.navIndex.value == 1 ? null : Colors.grey,
                     ),
                   ),
                   Text("Hot Sales"),
@@ -79,16 +80,14 @@ class BottomNav extends StatelessWidget {
                           FontAwesomeIcons.shoppingCart,
                           color: controller.navIndex.value == 2
                               ? homeIndicatorColor
-                              : null,
+                              : Colors.grey,
                         ),
                         CircleAvatar(
                             backgroundColor: Colors.orange,
                             minRadius: 0,
                             maxRadius: 10,
                             child: Text(
-                              "${controller.myCart.length + controller.myRewardCart.length
-                              
-                              }",
+                              "${controller.myCart.length + controller.myRewardCart.length}",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 14),
                             )),
@@ -110,7 +109,7 @@ class BottomNav extends StatelessWidget {
                       FontAwesomeIcons.solidHeart,
                       color: controller.navIndex.value == 3
                           ? homeIndicatorColor
-                          : null,
+                          : Colors.grey,
                     ),
                   ),
                   Text("Favourite"),
@@ -128,7 +127,7 @@ class BottomNav extends StatelessWidget {
                       FontAwesomeIcons.shoppingBag,
                       color: controller.navIndex.value == 4
                           ? homeIndicatorColor
-                          : null,
+                          : Colors.grey,
                     ),
                   ),
                   Text(
